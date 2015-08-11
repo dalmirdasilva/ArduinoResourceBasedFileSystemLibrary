@@ -11,12 +11,12 @@
 #ifndef __ARDUINO_SIMPLE_ARRAY_RESOURCE_IO_CPP__
 #define __ARDUINO_SIMPLE_ARRAY_RESOURCE_IO_CPP__ 1
 
-#include "SimpleArrayResourceIO.h"
+#include "ArrayResourceSystem.h"
 
-SimpleArrayResourceIO::SimpleArrayResourceIO(unsigned char* array, unsigned int size) : SimpleResourceIO(), array(array), size(size) {
+ArrayResourceSystem::ArrayResourceSystem(unsigned char* array, unsigned int size, rbfs_t *rbfs) : ResourceSystem(rbfs), array(array), size(size) {
 }
 
-int SimpleArrayResourceIO::readBytes(unsigned int address, unsigned char* buf, unsigned int len) {
+int ArrayResourceSystem::readBytes(unsigned int address, unsigned char* buf, unsigned int len) {
     unsigned int available = (size - address);
     if (available < 1) {
         return -1;
@@ -28,7 +28,7 @@ int SimpleArrayResourceIO::readBytes(unsigned int address, unsigned char* buf, u
     return len;
 }
 
-void SimpleArrayResourceIO::writeBytes(unsigned int address, unsigned char* buf, unsigned int len) {
+void ArrayResourceSystem::writeBytes(unsigned int address, unsigned char* buf, unsigned int len) {
     for (unsigned int i = 0; i < len && (address + i) < size; i++) {
         array[address + i] = buf[i];
     }

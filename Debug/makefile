@@ -49,38 +49,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-libArduinoSimpleResourceOrientedFileSystemLibrary.lss \
+libArduinoResourceOrientedFileSystemLibrary.lss \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: libArduinoSimpleResourceOrientedFileSystemLibrary.a secondary-outputs
+all: libArduinoResourceOrientedFileSystemLibrary.a secondary-outputs
 
 # Tool invocations
-libArduinoSimpleResourceOrientedFileSystemLibrary.a: $(OBJS)
+libArduinoResourceOrientedFileSystemLibrary.a: $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR Archiver'
-	avr-ar -r  "libArduinoSimpleResourceOrientedFileSystemLibrary.a" $(OBJS) $(LIBS)
+	avr-ar -r  "libArduinoResourceOrientedFileSystemLibrary.a" $(OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-libArduinoSimpleResourceOrientedFileSystemLibrary.lss: libArduinoSimpleResourceOrientedFileSystemLibrary.a
+libArduinoResourceOrientedFileSystemLibrary.lss: libArduinoResourceOrientedFileSystemLibrary.a
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S libArduinoSimpleResourceOrientedFileSystemLibrary.a  >"libArduinoSimpleResourceOrientedFileSystemLibrary.lss"
+	-avr-objdump -h -S libArduinoResourceOrientedFileSystemLibrary.a  >"libArduinoResourceOrientedFileSystemLibrary.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: libArduinoSimpleResourceOrientedFileSystemLibrary.a
+sizedummy: libArduinoResourceOrientedFileSystemLibrary.a
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega328p libArduinoSimpleResourceOrientedFileSystemLibrary.a
+	-avr-size --format=avr --mcu=atmega328p libArduinoResourceOrientedFileSystemLibrary.a
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(LSS)$(S_DEPS)$(CXX_DEPS)$(S_UPPER_DEPS)$(C++_DEPS)$(ASM_DEPS)$(CC_DEPS)$(ARCHIVES)$(CPP_DEPS)$(C_UPPER_DEPS)$(SIZEDUMMY) libArduinoSimpleResourceOrientedFileSystemLibrary.a
+	-$(RM) $(OBJS)$(C_DEPS)$(LSS)$(S_DEPS)$(CXX_DEPS)$(S_UPPER_DEPS)$(C++_DEPS)$(ASM_DEPS)$(CC_DEPS)$(ARCHIVES)$(CPP_DEPS)$(C_UPPER_DEPS)$(SIZEDUMMY) libArduinoResourceOrientedFileSystemLibrary.a
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(SIZEDUMMY)

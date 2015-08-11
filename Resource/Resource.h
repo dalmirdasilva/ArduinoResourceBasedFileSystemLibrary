@@ -11,7 +11,7 @@
 #ifndef __ARDUINO_SIMPLE_RESOURCE_H__
 #define __ARDUINO_SIMPLE_RESOURCE_H__ 1
 
-#include <srbfs.h>
+#include <rbfs.h>
 
 class Resource {
 
@@ -42,25 +42,33 @@ public:
 
 private:
 
-    srbfs_resource_code_t code;
-    srbfs_resource_t resource;
-    srbfs_t* srbfs;
+    rbfs_resource_code_t code;
+    rbfs_resource_t resource;
+    rbfs_t* rbfs;
     ResourceOperationResult lastOperationResult;
 
 public:
 
-    Resource(srbfs_resource_code_t code, srbfs_t* srbfs);
+    Resource(rbfs_resource_code_t code, rbfs_t* rbfs);
 
     ResourceOperationResult getLastOperationResult() {
         return lastOperationResult;
     }
 
     void setCode(int code) {
-        this->code = (srbfs_resource_code_t) code;
+        this->code = (rbfs_resource_code_t) code;
     }
 
     int getCode() {
         return (int) this->code;
+    }
+
+    void setRbfs(rbfs_t* rbfs) {
+        this->rbfs = rbfs;
+    }
+
+    rbfs_t* getRbfs() {
+        return this->rbfs;
     }
 
     bool open(OpenOptions options);

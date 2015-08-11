@@ -12,14 +12,16 @@
 #define __ARDUINO_SIMPLE_EXTERNAL_EEPROM_RESOURCE_IO_H__ 1
 
 #include <ExternalEeprom.h>
-#include <SimpleResourceIO.h>
+#include <ResourceSystem.h>
 
-class SimpleExternalEepromResourceIO : public SimpleResourceIO {
+class ExternalEepromResourceSystem: public ResourceSystem {
+
 private:
-    ExternalEeprom* externalEeprom;
+    ExternalEeprom* eeprom;
+
 public:
 
-    SimpleExternalEepromResourceIO(ExternalEeprom* externalEeprom);
+    ExternalEepromResourceSystem(ExternalEeprom* eeprom, rbfs_t *rbfs);
 
 protected:
 

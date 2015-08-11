@@ -13,23 +13,23 @@
 
 #include "Resource.h"
 
-Resource::Resource(srbfs_resource_code_t code, srbfs_t* srbfs) : code(code), srbfs(srbfs) {
+Resource::Resource(rbfs_resource_code_t code, rbfs_t* rbfs) : code(code), rbfs(rbfs) {
     lastOperationResult = OPERATION_SUCCESS;
 }
 
 bool Resource::open(OpenOptions options) {
-    lastOperationResult = (ResourceOperationResult) srbfs_open(srbfs, code, &resource, (srbfs_open_resource_options_t) options);
+    lastOperationResult = (ResourceOperationResult) rbfs_open(rbfs, code, &resource, (rbfs_open_resource_options_t) options);
     return (lastOperationResult == OPERATION_SUCCESS);
 }
 
 bool Resource::close() {
     sync();
-    lastOperationResult = (ResourceOperationResult) srbfs_close(srbfs, &resource);
+    lastOperationResult = (ResourceOperationResult) rbfs_close(rbfs, &resource);
     return (lastOperationResult == OPERATION_SUCCESS);
 }
 
 void Resource::write(unsigned char b) {
-    lastOperationResult = (ResourceOperationResult) srbfs_write(srbfs, &resource, b);
+    lastOperationResult = (ResourceOperationResult) rbfs_write(rbfs, &resource, b);
 }
 
 void Resource::writeBytes(unsigned char* buf, int count) {
@@ -43,7 +43,7 @@ int Resource::read() {
     if (eor()) {
         return -1;
     }
-    return srbfs_read(srbfs, &resource);
+    return rbfs_read(rbfs, &resource);
 }
 
 int Resource::readBytes(unsigned char* buf, int count) {
@@ -67,48 +67,48 @@ int Resource::readBytes(unsigned char* buf, int count) {
 }
 
 bool Resource::seek(ResourceSeekOrigin origin, unsigned int offset) {
-    lastOperationResult = (ResourceOperationResult) srbfs_seek(srbfs, &resource, (srbfs_seek_origin_t) origin, (srbfs_seek_int_t) offset);
+    lastOperationResult = (ResourceOperationResult) rbfs_seek(rbfs, &resource, (rbfs_seek_origin_t) origin, (rbfs_seek_int_t) offset);
     return (lastOperationResult == OPERATION_SUCCESS);
 }
 
 bool Resource::truncate() {
-    lastOperationResult = (ResourceOperationResult) srbfs_truncate(srbfs, &resource);
+    lastOperationResult = (ResourceOperationResult) rbfs_truncate(rbfs, &resource);
     return (lastOperationResult == OPERATION_SUCCESS);
 }
 
 void Resource::sync() {
-    srbfs_sync(srbfs, &resource);
-    ResourceIO::getAssociatedIO(srbfs->driver)->flush();
+    rbfs_sync(rbfs, &resource);
+    // TODO: flush();
 }
 
 bool Resource::rewind() {
-    lastOperationResult = (ResourceOperationResult) srbfs_rewind(srbfs, &resource);
+    lastOperationResult = (ResourceOperationResult) rbfs_rewind(rbfs, &resource);
     return (lastOperationResult == OPERATION_SUCCESS);
 }
 
 void Resource::release() {
     sync();
-    srbfs_release(srbfs, &resource);
+    rbfs_release(rbfs, &resource);
 }
 
 unsigned int Resource::size() {
-    return (unsigned int) srbfs_size(&resource);
+    return (unsigned int) rbfs_size(&resource);
 }
 
 unsigned int Resource::tell() {
-    return (unsigned int) srbfs_tell(&resource);
+    return (unsigned int) rbfs_tell(&resource);
 }
 
 bool Resource::eor() {
-    return (srbfs_eor(&resource) != 0);
+    return (rbfs_eor(&resource) != 0);
 }
 
 bool Resource::error() {
-    return (srbfs_error(&resource) != 0);
+    return (rbfs_error(&resource) != 0);
 }
 
 bool Resource::isReadOnly() {
-    return (srbfs->flags & RS_RESOURCE_FLAG_BIT_READ_ONLY) != 0;
+    return (rbfs->flags & RBFS_RESOURCE_FLAG_BIT_READ_ONLY) != 0;
 }
 
 #endif /* __ARDUINO_SIMPLE_RESOURCE_CPP__ */

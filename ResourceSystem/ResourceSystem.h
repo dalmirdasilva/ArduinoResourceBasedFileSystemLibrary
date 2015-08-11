@@ -13,13 +13,13 @@
 
 #include "ResourceSystem.h"
 #include <Resource.h>
-#include <srbfs.h>
+#include <rbfs.h>
 
 #define RESOURCE_SYSTEM_CACHE_SIZE 32
 
 class ResourceSystem {
 
-    srbfs_t *srbfs;
+    rbfs_t *rbfs;
     Resource::ResourceOperationResult lastOperationResult;
 
     bool wasCacheChanged, wasCacheInitialized;
@@ -35,7 +35,7 @@ public:
         MOUNT_READ_ONLY = 1
     };
 
-    ResourceSystem(srbfs_t *srbfs);
+    ResourceSystem(rbfs_t *rbfs);
 
     Resource::ResourceOperationResult getLastOperationResult() {
         return lastOperationResult;

@@ -1,0 +1,2023 @@
+In archive libArduinoResourceOrientedFileSystemLibrary.a:
+
+ResourceSystem.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .group        00000008  00000000  00000000  00000034  2**2
+                  CONTENTS, READONLY, EXCLUDE, GROUP, LINK_ONCE_DISCARD
+  1 .group        00000008  00000000  00000000  0000003c  2**2
+                  CONTENTS, READONLY, EXCLUDE, GROUP, LINK_ONCE_DISCARD
+  2 .group        00000008  00000000  00000000  00000044  2**2
+                  CONTENTS, READONLY, EXCLUDE, GROUP, LINK_ONCE_DISCARD
+  3 .text         00000000  00000000  00000000  0000004c  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  4 .data         00000000  00000000  00000000  0000004c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  5 .bss          00000000  00000000  00000000  0000004c  2**0
+                  ALLOC
+  6 .stab         00000bb8  00000000  00000000  0000004c  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  7 .stabstr      00001db8  00000000  00000000  00000c04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .text._ZN8Resource7setCodeEi 0000002c  00000000  00000000  000029bc  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .text._ZN8Resource7setRbfsEP6rbfs_t 00000030  00000000  00000000  000029e8  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 10 .text._ZN14ResourceSystemC2EP6rbfs_t 00000046  00000000  00000000  00002a18  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 11 .text._ZN14ResourceSystem6formatEv 00000036  00000000  00000000  00002a5e  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 12 .text._ZN14ResourceSystem5mountENS_12MountOptionsE 0000005a  00000000  00000000  00002a94  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 13 .text._ZN14ResourceSystem5flushEv 00000068  00000000  00000000  00002aee  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 14 .text._ZN14ResourceSystem6umountEv 0000005a  00000000  00000000  00002b56  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 15 .text._ZN14ResourceSystem13allocResourceEv 00000082  00000000  00000000  00002bb0  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 16 .text._ZN14ResourceSystem12loadResourceEi 00000084  00000000  00000000  00002c32  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 17 .text._ZN14ResourceSystem10totalSpaceEv 00000026  00000000  00000000  00002cb6  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 18 .text._ZN14ResourceSystem14availableSpaceEv 00000026  00000000  00000000  00002cdc  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 19 .text._ZN14ResourceSystem4readEhj 00000076  00000000  00000000  00002d02  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 20 .text._ZN14ResourceSystem5writeEhjh 0000006a  00000000  00000000  00002d78  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 21 .text._ZN14ResourceSystem10checkCacheEj 00000126  00000000  00000000  00002de2  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 22 .rodata._ZTV14ResourceSystem 00000018  00000000  00000000  00002f08  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 23 .comment      00000012  00000000  00000000  00002f20  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text._ZN8Resource7setCodeEi:
+
+00000000 <_ZN8Resource7setCodeEi>:
+    checkCache(address);
+    cache[address - cacheMemoryAddress] = b;
+    wasCacheChanged = true;
+}
+
+void ResourceSystem::checkCache(uint16_t address) {
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	00 d0       	rcall	.+0      	; 0x6 <_ZN8Resource7setCodeEi+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <_ZN8Resource7setCodeEi+0x8>
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	9a 83       	std	Y+2, r25	; 0x02
+   e:	89 83       	std	Y+1, r24	; 0x01
+  10:	7c 83       	std	Y+4, r23	; 0x04
+  12:	6b 83       	std	Y+3, r22	; 0x03
+    if (!wasCacheInitialized || (address < cacheMemoryAddress || address >= (cacheMemoryAddress + validCacheSize))) {
+  14:	2b 81       	ldd	r18, Y+3	; 0x03
+  16:	89 81       	ldd	r24, Y+1	; 0x01
+  18:	9a 81       	ldd	r25, Y+2	; 0x02
+  1a:	fc 01       	movw	r30, r24
+  1c:	20 83       	st	Z, r18
+  1e:	0f 90       	pop	r0
+  20:	0f 90       	pop	r0
+  22:	0f 90       	pop	r0
+  24:	0f 90       	pop	r0
+  26:	df 91       	pop	r29
+  28:	cf 91       	pop	r28
+  2a:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource7setRbfsEP6rbfs_t:
+
+0000002c <_ZN8Resource7setRbfsEP6rbfs_t>:
+  2c:	cf 93       	push	r28
+  2e:	df 93       	push	r29
+  30:	00 d0       	rcall	.+0      	; 0x32 <_ZN8Resource7setRbfsEP6rbfs_t+0x6>
+  32:	00 d0       	rcall	.+0      	; 0x34 <_ZN8Resource7setRbfsEP6rbfs_t+0x8>
+  34:	cd b7       	in	r28, 0x3d	; 61
+  36:	de b7       	in	r29, 0x3e	; 62
+  38:	9a 83       	std	Y+2, r25	; 0x02
+  3a:	89 83       	std	Y+1, r24	; 0x01
+  3c:	7c 83       	std	Y+4, r23	; 0x04
+  3e:	6b 83       	std	Y+3, r22	; 0x03
+  40:	89 81       	ldd	r24, Y+1	; 0x01
+  42:	9a 81       	ldd	r25, Y+2	; 0x02
+  44:	2b 81       	ldd	r18, Y+3	; 0x03
+  46:	3c 81       	ldd	r19, Y+4	; 0x04
+  48:	fc 01       	movw	r30, r24
+  4a:	33 87       	std	Z+11, r19	; 0x0b
+  4c:	22 87       	std	Z+10, r18	; 0x0a
+  4e:	0f 90       	pop	r0
+  50:	0f 90       	pop	r0
+  52:	0f 90       	pop	r0
+  54:	0f 90       	pop	r0
+  56:	df 91       	pop	r29
+  58:	cf 91       	pop	r28
+  5a:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystemC2EP6rbfs_t:
+
+00000088 <_ZN14ResourceSystemC1EP6rbfs_t>:
+        flush();
+        validCacheSize = readBytes(address, cache, RESOURCE_SYSTEM_CACHE_SIZE);
+  88:	cf 93       	push	r28
+  8a:	df 93       	push	r29
+  8c:	00 d0       	rcall	.+0      	; 0x8e <_ZN14ResourceSystemC1EP6rbfs_t+0x6>
+  8e:	00 d0       	rcall	.+0      	; 0x90 <_ZN14ResourceSystemC1EP6rbfs_t+0x8>
+  90:	cd b7       	in	r28, 0x3d	; 61
+  92:	de b7       	in	r29, 0x3e	; 62
+  94:	9a 83       	std	Y+2, r25	; 0x02
+  96:	89 83       	std	Y+1, r24	; 0x01
+  98:	7c 83       	std	Y+4, r23	; 0x04
+  9a:	6b 83       	std	Y+3, r22	; 0x03
+  9c:	89 81       	ldd	r24, Y+1	; 0x01
+  9e:	9a 81       	ldd	r25, Y+2	; 0x02
+  a0:	20 e0       	ldi	r18, 0x00	; 0
+  a2:	30 e0       	ldi	r19, 0x00	; 0
+  a4:	fc 01       	movw	r30, r24
+  a6:	31 83       	std	Z+1, r19	; 0x01
+  a8:	20 83       	st	Z, r18
+  aa:	89 81       	ldd	r24, Y+1	; 0x01
+  ac:	9a 81       	ldd	r25, Y+2	; 0x02
+  ae:	2b 81       	ldd	r18, Y+3	; 0x03
+  b0:	3c 81       	ldd	r19, Y+4	; 0x04
+  b2:	fc 01       	movw	r30, r24
+        cacheMemoryAddress = address;
+  b4:	33 83       	std	Z+3, r19	; 0x03
+  b6:	22 83       	std	Z+2, r18	; 0x02
+  b8:	89 81       	ldd	r24, Y+1	; 0x01
+  ba:	9a 81       	ldd	r25, Y+2	; 0x02
+  bc:	fc 01       	movw	r30, r24
+  be:	14 82       	std	Z+4, r1	; 0x04
+  c0:	0f 90       	pop	r0
+  c2:	0f 90       	pop	r0
+  c4:	0f 90       	pop	r0
+        wasCacheChanged = false;
+  c6:	0f 90       	pop	r0
+  c8:	df 91       	pop	r29
+  ca:	cf 91       	pop	r28
+  cc:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem6formatEv:
+
+00000156 <_ZN14ResourceSystem6formatEv>:
+        wasCacheInitialized = true;
+        cacheMiss++;
+    } else {
+        cacheHit++;
+    }
+}
+ 156:	cf 93       	push	r28
+ 158:	df 93       	push	r29
+ 15a:	00 d0       	rcall	.+0      	; 0x15c <_ZN14ResourceSystem6formatEv+0x6>
+ 15c:	1f 92       	push	r1
+ 15e:	cd b7       	in	r28, 0x3d	; 61
+ 160:	de b7       	in	r29, 0x3e	; 62
+ 162:	9b 83       	std	Y+3, r25	; 0x03
+ 164:	8a 83       	std	Y+2, r24	; 0x02
+ 166:	8a 81       	ldd	r24, Y+2	; 0x02
+ 168:	9b 81       	ldd	r25, Y+3	; 0x03
+ 16a:	fc 01       	movw	r30, r24
+ 16c:	82 81       	ldd	r24, Z+2	; 0x02
+ 16e:	93 81       	ldd	r25, Z+3	; 0x03
+ 170:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 174:	89 83       	std	Y+1, r24	; 0x01
+ 176:	81 e0       	ldi	r24, 0x01	; 1
+ 178:	99 81       	ldd	r25, Y+1	; 0x01
+ 17a:	99 23       	and	r25, r25
+ 17c:	01 f0       	breq	.+0      	; 0x17e <_ZN14ResourceSystem6formatEv+0x28>
+ 17e:	80 e0       	ldi	r24, 0x00	; 0
+ 180:	0f 90       	pop	r0
+ 182:	0f 90       	pop	r0
+ 184:	0f 90       	pop	r0
+ 186:	df 91       	pop	r29
+ 188:	cf 91       	pop	r28
+ 18a:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem5mountENS_12MountOptionsE:
+
+000002e2 <_ZN14ResourceSystem5mountENS_12MountOptionsE>:
+ 2e2:	cf 93       	push	r28
+ 2e4:	df 93       	push	r29
+ 2e6:	00 d0       	rcall	.+0      	; 0x2e8 <_ZN14ResourceSystem5mountENS_12MountOptionsE+0x6>
+ 2e8:	1f 92       	push	r1
+ 2ea:	cd b7       	in	r28, 0x3d	; 61
+ 2ec:	de b7       	in	r29, 0x3e	; 62
+ 2ee:	9a 83       	std	Y+2, r25	; 0x02
+ 2f0:	89 83       	std	Y+1, r24	; 0x01
+ 2f2:	6b 83       	std	Y+3, r22	; 0x03
+ 2f4:	89 81       	ldd	r24, Y+1	; 0x01
+ 2f6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2f8:	fc 01       	movw	r30, r24
+ 2fa:	82 81       	ldd	r24, Z+2	; 0x02
+ 2fc:	93 81       	ldd	r25, Z+3	; 0x03
+ 2fe:	29 81       	ldd	r18, Y+1	; 0x01
+ 300:	3a 81       	ldd	r19, Y+2	; 0x02
+ 302:	f9 01       	movw	r30, r18
+ 304:	22 81       	ldd	r18, Z+2	; 0x02
+ 306:	33 81       	ldd	r19, Z+3	; 0x03
+ 308:	f9 01       	movw	r30, r18
+ 30a:	20 81       	ld	r18, Z
+ 30c:	4b 81       	ldd	r20, Y+3	; 0x03
+ 30e:	bc 01       	movw	r22, r24
+ 310:	82 2f       	mov	r24, r18
+ 312:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 316:	28 2f       	mov	r18, r24
+ 318:	89 81       	ldd	r24, Y+1	; 0x01
+ 31a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 31c:	fc 01       	movw	r30, r24
+ 31e:	24 83       	std	Z+4, r18	; 0x04
+ 320:	89 81       	ldd	r24, Y+1	; 0x01
+ 322:	9a 81       	ldd	r25, Y+2	; 0x02
+ 324:	fc 01       	movw	r30, r24
+ 326:	94 81       	ldd	r25, Z+4	; 0x04
+ 328:	81 e0       	ldi	r24, 0x01	; 1
+ 32a:	99 23       	and	r25, r25
+ 32c:	01 f0       	breq	.+0      	; 0x32e <_ZN14ResourceSystem5mountENS_12MountOptionsE+0x4c>
+ 32e:	80 e0       	ldi	r24, 0x00	; 0
+ 330:	0f 90       	pop	r0
+ 332:	0f 90       	pop	r0
+ 334:	0f 90       	pop	r0
+ 336:	df 91       	pop	r29
+ 338:	cf 91       	pop	r28
+ 33a:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem5flushEv:
+
+0000061e <_ZN14ResourceSystem5flushEv>:
+ 61e:	cf 93       	push	r28
+ 620:	df 93       	push	r29
+ 622:	00 d0       	rcall	.+0      	; 0x624 <_ZN14ResourceSystem5flushEv+0x6>
+ 624:	cd b7       	in	r28, 0x3d	; 61
+ 626:	de b7       	in	r29, 0x3e	; 62
+ 628:	9a 83       	std	Y+2, r25	; 0x02
+ 62a:	89 83       	std	Y+1, r24	; 0x01
+ 62c:	89 81       	ldd	r24, Y+1	; 0x01
+ 62e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 630:	dc 01       	movw	r26, r24
+ 632:	15 96       	adiw	r26, 0x05	; 5
+ 634:	8c 91       	ld	r24, X
+ 636:	15 97       	sbiw	r26, 0x05	; 5
+ 638:	88 23       	and	r24, r24
+ 63a:	01 f0       	breq	.+0      	; 0x63c <_ZN14ResourceSystem5flushEv+0x1e>
+ 63c:	89 81       	ldd	r24, Y+1	; 0x01
+ 63e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 640:	fc 01       	movw	r30, r24
+ 642:	80 81       	ld	r24, Z
+ 644:	91 81       	ldd	r25, Z+1	; 0x01
+ 646:	42 96       	adiw	r24, 0x12	; 18
+ 648:	dc 01       	movw	r26, r24
+ 64a:	ed 91       	ld	r30, X+
+ 64c:	fc 91       	ld	r31, X
+ 64e:	89 81       	ldd	r24, Y+1	; 0x01
+ 650:	9a 81       	ldd	r25, Y+2	; 0x02
+ 652:	dc 01       	movw	r26, r24
+ 654:	9d 96       	adiw	r26, 0x2d	; 45
+ 656:	8d 91       	ld	r24, X+
+ 658:	9c 91       	ld	r25, X
+ 65a:	9e 97       	sbiw	r26, 0x2e	; 46
+ 65c:	9c 01       	movw	r18, r24
+ 65e:	89 81       	ldd	r24, Y+1	; 0x01
+ 660:	9a 81       	ldd	r25, Y+2	; 0x02
+ 662:	ac 01       	movw	r20, r24
+ 664:	47 5f       	subi	r20, 0xF7	; 247
+ 666:	5f 4f       	sbci	r21, 0xFF	; 255
+ 668:	89 81       	ldd	r24, Y+1	; 0x01
+ 66a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 66c:	dc 01       	movw	r26, r24
+ 66e:	17 96       	adiw	r26, 0x07	; 7
+ 670:	6d 91       	ld	r22, X+
+ 672:	7c 91       	ld	r23, X
+ 674:	18 97       	sbiw	r26, 0x08	; 8
+ 676:	89 81       	ldd	r24, Y+1	; 0x01
+ 678:	9a 81       	ldd	r25, Y+2	; 0x02
+ 67a:	09 95       	icall
+ 67c:	0f 90       	pop	r0
+ 67e:	0f 90       	pop	r0
+ 680:	df 91       	pop	r29
+ 682:	cf 91       	pop	r28
+ 684:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem6umountEv:
+
+00000ca4 <_ZN14ResourceSystem6umountEv>:
+ ca4:	cf 93       	push	r28
+ ca6:	df 93       	push	r29
+ ca8:	00 d0       	rcall	.+0      	; 0xcaa <_ZN14ResourceSystem6umountEv+0x6>
+ caa:	cd b7       	in	r28, 0x3d	; 61
+ cac:	de b7       	in	r29, 0x3e	; 62
+ cae:	9a 83       	std	Y+2, r25	; 0x02
+ cb0:	89 83       	std	Y+1, r24	; 0x01
+ cb2:	89 81       	ldd	r24, Y+1	; 0x01
+ cb4:	9a 81       	ldd	r25, Y+2	; 0x02
+ cb6:	fc 01       	movw	r30, r24
+ cb8:	80 81       	ld	r24, Z
+ cba:	91 81       	ldd	r25, Z+1	; 0x01
+ cbc:	0e 96       	adiw	r24, 0x0e	; 14
+ cbe:	fc 01       	movw	r30, r24
+ cc0:	20 81       	ld	r18, Z
+ cc2:	31 81       	ldd	r19, Z+1	; 0x01
+ cc4:	89 81       	ldd	r24, Y+1	; 0x01
+ cc6:	9a 81       	ldd	r25, Y+2	; 0x02
+ cc8:	f9 01       	movw	r30, r18
+ cca:	09 95       	icall
+ ccc:	89 81       	ldd	r24, Y+1	; 0x01
+ cce:	9a 81       	ldd	r25, Y+2	; 0x02
+ cd0:	fc 01       	movw	r30, r24
+ cd2:	82 81       	ldd	r24, Z+2	; 0x02
+ cd4:	93 81       	ldd	r25, Z+3	; 0x03
+ cd6:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ cda:	28 2f       	mov	r18, r24
+ cdc:	89 81       	ldd	r24, Y+1	; 0x01
+ cde:	9a 81       	ldd	r25, Y+2	; 0x02
+ ce0:	fc 01       	movw	r30, r24
+ ce2:	24 83       	std	Z+4, r18	; 0x04
+ ce4:	89 81       	ldd	r24, Y+1	; 0x01
+ ce6:	9a 81       	ldd	r25, Y+2	; 0x02
+ ce8:	fc 01       	movw	r30, r24
+ cea:	94 81       	ldd	r25, Z+4	; 0x04
+ cec:	81 e0       	ldi	r24, 0x01	; 1
+ cee:	99 23       	and	r25, r25
+ cf0:	01 f0       	breq	.+0      	; 0xcf2 <_ZN14ResourceSystem6umountEv+0x4e>
+ cf2:	80 e0       	ldi	r24, 0x00	; 0
+ cf4:	0f 90       	pop	r0
+ cf6:	0f 90       	pop	r0
+ cf8:	df 91       	pop	r29
+ cfa:	cf 91       	pop	r28
+ cfc:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem13allocResourceEv:
+
+000019a2 <_ZN14ResourceSystem13allocResourceEv>:
+    19a2:	cf 93       	push	r28
+    19a4:	df 93       	push	r29
+    19a6:	00 d0       	rcall	.+0      	; 0x19a8 <_ZN14ResourceSystem13allocResourceEv+0x6>
+    19a8:	00 d0       	rcall	.+0      	; 0x19aa <_ZN14ResourceSystem13allocResourceEv+0x8>
+    19aa:	1f 92       	push	r1
+    19ac:	cd b7       	in	r28, 0x3d	; 61
+    19ae:	de b7       	in	r29, 0x3e	; 62
+    19b0:	9b 83       	std	Y+3, r25	; 0x03
+    19b2:	8a 83       	std	Y+2, r24	; 0x02
+    19b4:	7d 83       	std	Y+5, r23	; 0x05
+    19b6:	6c 83       	std	Y+4, r22	; 0x04
+    19b8:	8c 81       	ldd	r24, Y+4	; 0x04
+    19ba:	9d 81       	ldd	r25, Y+5	; 0x05
+    19bc:	fc 01       	movw	r30, r24
+    19be:	80 81       	ld	r24, Z
+    19c0:	91 81       	ldd	r25, Z+1	; 0x01
+    19c2:	0e 96       	adiw	r24, 0x0e	; 14
+    19c4:	fc 01       	movw	r30, r24
+    19c6:	20 81       	ld	r18, Z
+    19c8:	31 81       	ldd	r19, Z+1	; 0x01
+    19ca:	8c 81       	ldd	r24, Y+4	; 0x04
+    19cc:	9d 81       	ldd	r25, Y+5	; 0x05
+    19ce:	f9 01       	movw	r30, r18
+    19d0:	09 95       	icall
+    19d2:	8c 81       	ldd	r24, Y+4	; 0x04
+    19d4:	9d 81       	ldd	r25, Y+5	; 0x05
+    19d6:	fc 01       	movw	r30, r24
+    19d8:	22 81       	ldd	r18, Z+2	; 0x02
+    19da:	33 81       	ldd	r19, Z+3	; 0x03
+    19dc:	8a 81       	ldd	r24, Y+2	; 0x02
+    19de:	9b 81       	ldd	r25, Y+3	; 0x03
+    19e0:	a9 01       	movw	r20, r18
+    19e2:	6f ef       	ldi	r22, 0xFF	; 255
+    19e4:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    19e8:	8c 81       	ldd	r24, Y+4	; 0x04
+    19ea:	9d 81       	ldd	r25, Y+5	; 0x05
+    19ec:	fc 01       	movw	r30, r24
+    19ee:	82 81       	ldd	r24, Z+2	; 0x02
+    19f0:	93 81       	ldd	r25, Z+3	; 0x03
+    19f2:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    19f6:	89 83       	std	Y+1, r24	; 0x01
+    19f8:	89 81       	ldd	r24, Y+1	; 0x01
+    19fa:	8f 3f       	cpi	r24, 0xFF	; 255
+    19fc:	01 f0       	breq	.+0      	; 0x19fe <_ZN14ResourceSystem13allocResourceEv+0x5c>
+    19fe:	89 81       	ldd	r24, Y+1	; 0x01
+    1a00:	28 2f       	mov	r18, r24
+    1a02:	30 e0       	ldi	r19, 0x00	; 0
+    1a04:	8a 81       	ldd	r24, Y+2	; 0x02
+    1a06:	9b 81       	ldd	r25, Y+3	; 0x03
+    1a08:	b9 01       	movw	r22, r18
+    1a0a:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    1a0e:	00 00       	nop
+    1a10:	8a 81       	ldd	r24, Y+2	; 0x02
+    1a12:	9b 81       	ldd	r25, Y+3	; 0x03
+    1a14:	0f 90       	pop	r0
+    1a16:	0f 90       	pop	r0
+    1a18:	0f 90       	pop	r0
+    1a1a:	0f 90       	pop	r0
+    1a1c:	0f 90       	pop	r0
+    1a1e:	df 91       	pop	r29
+    1a20:	cf 91       	pop	r28
+    1a22:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem12loadResourceEi:
+
+000033c6 <_ZN14ResourceSystem12loadResourceEi>:
+    33c6:	cf 93       	push	r28
+    33c8:	df 93       	push	r29
+    33ca:	00 d0       	rcall	.+0      	; 0x33cc <_ZN14ResourceSystem12loadResourceEi+0x6>
+    33cc:	00 d0       	rcall	.+0      	; 0x33ce <_ZN14ResourceSystem12loadResourceEi+0x8>
+    33ce:	00 d0       	rcall	.+0      	; 0x33d0 <_ZN14ResourceSystem12loadResourceEi+0xa>
+    33d0:	cd b7       	in	r28, 0x3d	; 61
+    33d2:	de b7       	in	r29, 0x3e	; 62
+    33d4:	9a 83       	std	Y+2, r25	; 0x02
+    33d6:	89 83       	std	Y+1, r24	; 0x01
+    33d8:	7c 83       	std	Y+4, r23	; 0x04
+    33da:	6b 83       	std	Y+3, r22	; 0x03
+    33dc:	5e 83       	std	Y+6, r21	; 0x06
+    33de:	4d 83       	std	Y+5, r20	; 0x05
+    33e0:	8b 81       	ldd	r24, Y+3	; 0x03
+    33e2:	9c 81       	ldd	r25, Y+4	; 0x04
+    33e4:	fc 01       	movw	r30, r24
+    33e6:	80 81       	ld	r24, Z
+    33e8:	91 81       	ldd	r25, Z+1	; 0x01
+    33ea:	0e 96       	adiw	r24, 0x0e	; 14
+    33ec:	fc 01       	movw	r30, r24
+    33ee:	20 81       	ld	r18, Z
+    33f0:	31 81       	ldd	r19, Z+1	; 0x01
+    33f2:	8b 81       	ldd	r24, Y+3	; 0x03
+    33f4:	9c 81       	ldd	r25, Y+4	; 0x04
+    33f6:	f9 01       	movw	r30, r18
+    33f8:	09 95       	icall
+    33fa:	8b 81       	ldd	r24, Y+3	; 0x03
+    33fc:	9c 81       	ldd	r25, Y+4	; 0x04
+    33fe:	fc 01       	movw	r30, r24
+    3400:	22 81       	ldd	r18, Z+2	; 0x02
+    3402:	33 81       	ldd	r19, Z+3	; 0x03
+    3404:	6d 81       	ldd	r22, Y+5	; 0x05
+    3406:	89 81       	ldd	r24, Y+1	; 0x01
+    3408:	9a 81       	ldd	r25, Y+2	; 0x02
+    340a:	a9 01       	movw	r20, r18
+    340c:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    3410:	8b 81       	ldd	r24, Y+3	; 0x03
+    3412:	9c 81       	ldd	r25, Y+4	; 0x04
+    3414:	fc 01       	movw	r30, r24
+    3416:	22 81       	ldd	r18, Z+2	; 0x02
+    3418:	33 81       	ldd	r19, Z+3	; 0x03
+    341a:	89 81       	ldd	r24, Y+1	; 0x01
+    341c:	9a 81       	ldd	r25, Y+2	; 0x02
+    341e:	b9 01       	movw	r22, r18
+    3420:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    3424:	2d 81       	ldd	r18, Y+5	; 0x05
+    3426:	3e 81       	ldd	r19, Y+6	; 0x06
+    3428:	89 81       	ldd	r24, Y+1	; 0x01
+    342a:	9a 81       	ldd	r25, Y+2	; 0x02
+    342c:	b9 01       	movw	r22, r18
+    342e:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    3432:	00 00       	nop
+    3434:	89 81       	ldd	r24, Y+1	; 0x01
+    3436:	9a 81       	ldd	r25, Y+2	; 0x02
+    3438:	26 96       	adiw	r28, 0x06	; 6
+    343a:	0f b6       	in	r0, 0x3f	; 63
+    343c:	f8 94       	cli
+    343e:	de bf       	out	0x3e, r29	; 62
+    3440:	0f be       	out	0x3f, r0	; 63
+    3442:	cd bf       	out	0x3d, r28	; 61
+    3444:	df 91       	pop	r29
+    3446:	cf 91       	pop	r28
+    3448:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem10totalSpaceEv:
+
+00006810 <_ZN14ResourceSystem10totalSpaceEv>:
+    6810:	cf 93       	push	r28
+    6812:	df 93       	push	r29
+    6814:	00 d0       	rcall	.+0      	; 0x6816 <_ZN14ResourceSystem10totalSpaceEv+0x6>
+    6816:	cd b7       	in	r28, 0x3d	; 61
+    6818:	de b7       	in	r29, 0x3e	; 62
+    681a:	9a 83       	std	Y+2, r25	; 0x02
+    681c:	89 83       	std	Y+1, r24	; 0x01
+    681e:	89 81       	ldd	r24, Y+1	; 0x01
+    6820:	9a 81       	ldd	r25, Y+2	; 0x02
+    6822:	fc 01       	movw	r30, r24
+    6824:	82 81       	ldd	r24, Z+2	; 0x02
+    6826:	93 81       	ldd	r25, Z+3	; 0x03
+    6828:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    682c:	0f 90       	pop	r0
+    682e:	0f 90       	pop	r0
+    6830:	df 91       	pop	r29
+    6832:	cf 91       	pop	r28
+    6834:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem14availableSpaceEv:
+
+0000d046 <_ZN14ResourceSystem14availableSpaceEv>:
+    d046:	cf 93       	push	r28
+    d048:	df 93       	push	r29
+    d04a:	00 d0       	rcall	.+0      	; 0xd04c <_ZN14ResourceSystem14availableSpaceEv+0x6>
+    d04c:	cd b7       	in	r28, 0x3d	; 61
+    d04e:	de b7       	in	r29, 0x3e	; 62
+    d050:	9a 83       	std	Y+2, r25	; 0x02
+    d052:	89 83       	std	Y+1, r24	; 0x01
+    d054:	89 81       	ldd	r24, Y+1	; 0x01
+    d056:	9a 81       	ldd	r25, Y+2	; 0x02
+    d058:	fc 01       	movw	r30, r24
+    d05a:	82 81       	ldd	r24, Z+2	; 0x02
+    d05c:	93 81       	ldd	r25, Z+3	; 0x03
+    d05e:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    d062:	0f 90       	pop	r0
+    d064:	0f 90       	pop	r0
+    d066:	df 91       	pop	r29
+    d068:	cf 91       	pop	r28
+    d06a:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem4readEhj:
+
+0001a0b2 <_ZN14ResourceSystem4readEhj>:
+   1a0b2:	cf 93       	push	r28
+   1a0b4:	df 93       	push	r29
+   1a0b6:	00 d0       	rcall	.+0      	; 0x1a0b8 <_ZN14ResourceSystem4readEhj+0x6>
+   1a0b8:	00 d0       	rcall	.+0      	; 0x1a0ba <_ZN14ResourceSystem4readEhj+0x8>
+   1a0ba:	1f 92       	push	r1
+   1a0bc:	cd b7       	in	r28, 0x3d	; 61
+   1a0be:	de b7       	in	r29, 0x3e	; 62
+   1a0c0:	9a 83       	std	Y+2, r25	; 0x02
+   1a0c2:	89 83       	std	Y+1, r24	; 0x01
+   1a0c4:	6b 83       	std	Y+3, r22	; 0x03
+   1a0c6:	5d 83       	std	Y+5, r21	; 0x05
+   1a0c8:	4c 83       	std	Y+4, r20	; 0x04
+   1a0ca:	2c 81       	ldd	r18, Y+4	; 0x04
+   1a0cc:	3d 81       	ldd	r19, Y+5	; 0x05
+   1a0ce:	89 81       	ldd	r24, Y+1	; 0x01
+   1a0d0:	9a 81       	ldd	r25, Y+2	; 0x02
+   1a0d2:	b9 01       	movw	r22, r18
+   1a0d4:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   1a0d8:	89 81       	ldd	r24, Y+1	; 0x01
+   1a0da:	9a 81       	ldd	r25, Y+2	; 0x02
+   1a0dc:	fc 01       	movw	r30, r24
+   1a0de:	85 a5       	ldd	r24, Z+45	; 0x2d
+   1a0e0:	96 a5       	ldd	r25, Z+46	; 0x2e
+   1a0e2:	00 97       	sbiw	r24, 0x00	; 0
+   1a0e4:	01 f4       	brne	.+0      	; 0x1a0e6 <_ZN14ResourceSystem4readEhj+0x34>
+   1a0e6:	89 81       	ldd	r24, Y+1	; 0x01
+   1a0e8:	9a 81       	ldd	r25, Y+2	; 0x02
+   1a0ea:	29 e0       	ldi	r18, 0x09	; 9
+   1a0ec:	fc 01       	movw	r30, r24
+   1a0ee:	24 83       	std	Z+4, r18	; 0x04
+   1a0f0:	80 e0       	ldi	r24, 0x00	; 0
+   1a0f2:	00 c0       	rjmp	.+0      	; 0x1a0f4 <_ZN14ResourceSystem4readEhj+0x42>
+   1a0f4:	89 81       	ldd	r24, Y+1	; 0x01
+   1a0f6:	9a 81       	ldd	r25, Y+2	; 0x02
+   1a0f8:	fc 01       	movw	r30, r24
+   1a0fa:	87 81       	ldd	r24, Z+7	; 0x07
+   1a0fc:	90 85       	ldd	r25, Z+8	; 0x08
+   1a0fe:	2c 81       	ldd	r18, Y+4	; 0x04
+   1a100:	3d 81       	ldd	r19, Y+5	; 0x05
+   1a102:	a9 01       	movw	r20, r18
+   1a104:	48 1b       	sub	r20, r24
+   1a106:	59 0b       	sbc	r21, r25
+   1a108:	ca 01       	movw	r24, r20
+   1a10a:	29 81       	ldd	r18, Y+1	; 0x01
+   1a10c:	3a 81       	ldd	r19, Y+2	; 0x02
+   1a10e:	82 0f       	add	r24, r18
+   1a110:	93 1f       	adc	r25, r19
+   1a112:	09 96       	adiw	r24, 0x09	; 9
+   1a114:	fc 01       	movw	r30, r24
+   1a116:	80 81       	ld	r24, Z
+   1a118:	0f 90       	pop	r0
+   1a11a:	0f 90       	pop	r0
+   1a11c:	0f 90       	pop	r0
+   1a11e:	0f 90       	pop	r0
+   1a120:	0f 90       	pop	r0
+   1a122:	df 91       	pop	r29
+   1a124:	cf 91       	pop	r28
+   1a126:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem5writeEhjh:
+
+000341da <_ZN14ResourceSystem5writeEhjh>:
+   341da:	cf 93       	push	r28
+   341dc:	df 93       	push	r29
+   341de:	00 d0       	rcall	.+0      	; 0x341e0 <_ZN14ResourceSystem5writeEhjh+0x6>
+   341e0:	00 d0       	rcall	.+0      	; 0x341e2 <_ZN14ResourceSystem5writeEhjh+0x8>
+   341e2:	00 d0       	rcall	.+0      	; 0x341e4 <_ZN14ResourceSystem5writeEhjh+0xa>
+   341e4:	cd b7       	in	r28, 0x3d	; 61
+   341e6:	de b7       	in	r29, 0x3e	; 62
+   341e8:	9a 83       	std	Y+2, r25	; 0x02
+   341ea:	89 83       	std	Y+1, r24	; 0x01
+   341ec:	6b 83       	std	Y+3, r22	; 0x03
+   341ee:	5d 83       	std	Y+5, r21	; 0x05
+   341f0:	4c 83       	std	Y+4, r20	; 0x04
+   341f2:	2e 83       	std	Y+6, r18	; 0x06
+   341f4:	2c 81       	ldd	r18, Y+4	; 0x04
+   341f6:	3d 81       	ldd	r19, Y+5	; 0x05
+   341f8:	89 81       	ldd	r24, Y+1	; 0x01
+   341fa:	9a 81       	ldd	r25, Y+2	; 0x02
+   341fc:	b9 01       	movw	r22, r18
+   341fe:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   34202:	89 81       	ldd	r24, Y+1	; 0x01
+   34204:	9a 81       	ldd	r25, Y+2	; 0x02
+   34206:	fc 01       	movw	r30, r24
+   34208:	87 81       	ldd	r24, Z+7	; 0x07
+   3420a:	90 85       	ldd	r25, Z+8	; 0x08
+   3420c:	2c 81       	ldd	r18, Y+4	; 0x04
+   3420e:	3d 81       	ldd	r19, Y+5	; 0x05
+   34210:	a9 01       	movw	r20, r18
+   34212:	48 1b       	sub	r20, r24
+   34214:	59 0b       	sbc	r21, r25
+   34216:	ca 01       	movw	r24, r20
+   34218:	29 81       	ldd	r18, Y+1	; 0x01
+   3421a:	3a 81       	ldd	r19, Y+2	; 0x02
+   3421c:	82 0f       	add	r24, r18
+   3421e:	93 1f       	adc	r25, r19
+   34220:	09 96       	adiw	r24, 0x09	; 9
+   34222:	2e 81       	ldd	r18, Y+6	; 0x06
+   34224:	fc 01       	movw	r30, r24
+   34226:	20 83       	st	Z, r18
+   34228:	89 81       	ldd	r24, Y+1	; 0x01
+   3422a:	9a 81       	ldd	r25, Y+2	; 0x02
+   3422c:	21 e0       	ldi	r18, 0x01	; 1
+   3422e:	fc 01       	movw	r30, r24
+   34230:	25 83       	std	Z+5, r18	; 0x05
+   34232:	26 96       	adiw	r28, 0x06	; 6
+   34234:	0f b6       	in	r0, 0x3f	; 63
+   34236:	f8 94       	cli
+   34238:	de bf       	out	0x3e, r29	; 62
+   3423a:	0f be       	out	0x3f, r0	; 63
+   3423c:	cd bf       	out	0x3d, r28	; 61
+   3423e:	df 91       	pop	r29
+   34240:	cf 91       	pop	r28
+   34242:	08 95       	ret
+
+Disassembly of section .text._ZN14ResourceSystem10checkCacheEj:
+
+0006841e <_ZN14ResourceSystem10checkCacheEj>:
+   6841e:	cf 93       	push	r28
+   68420:	df 93       	push	r29
+   68422:	00 d0       	rcall	.+0      	; 0x68424 <_ZN14ResourceSystem10checkCacheEj+0x6>
+   68424:	00 d0       	rcall	.+0      	; 0x68426 <_ZN14ResourceSystem10checkCacheEj+0x8>
+   68426:	cd b7       	in	r28, 0x3d	; 61
+   68428:	de b7       	in	r29, 0x3e	; 62
+   6842a:	9a 83       	std	Y+2, r25	; 0x02
+   6842c:	89 83       	std	Y+1, r24	; 0x01
+   6842e:	7c 83       	std	Y+4, r23	; 0x04
+   68430:	6b 83       	std	Y+3, r22	; 0x03
+   68432:	89 81       	ldd	r24, Y+1	; 0x01
+   68434:	9a 81       	ldd	r25, Y+2	; 0x02
+   68436:	dc 01       	movw	r26, r24
+   68438:	16 96       	adiw	r26, 0x06	; 6
+   6843a:	9c 91       	ld	r25, X
+   6843c:	16 97       	sbiw	r26, 0x06	; 6
+   6843e:	81 e0       	ldi	r24, 0x01	; 1
+   68440:	89 27       	eor	r24, r25
+   68442:	88 23       	and	r24, r24
+   68444:	01 f4       	brne	.+0      	; 0x68446 <_ZN14ResourceSystem10checkCacheEj+0x28>
+   68446:	89 81       	ldd	r24, Y+1	; 0x01
+   68448:	9a 81       	ldd	r25, Y+2	; 0x02
+   6844a:	fc 01       	movw	r30, r24
+   6844c:	27 81       	ldd	r18, Z+7	; 0x07
+   6844e:	30 85       	ldd	r19, Z+8	; 0x08
+   68450:	8b 81       	ldd	r24, Y+3	; 0x03
+   68452:	9c 81       	ldd	r25, Y+4	; 0x04
+   68454:	82 17       	cp	r24, r18
+   68456:	93 07       	cpc	r25, r19
+   68458:	00 f0       	brcs	.+0      	; 0x6845a <_ZN14ResourceSystem10checkCacheEj+0x3c>
+   6845a:	89 81       	ldd	r24, Y+1	; 0x01
+   6845c:	9a 81       	ldd	r25, Y+2	; 0x02
+   6845e:	dc 01       	movw	r26, r24
+   68460:	17 96       	adiw	r26, 0x07	; 7
+   68462:	2d 91       	ld	r18, X+
+   68464:	3c 91       	ld	r19, X
+   68466:	18 97       	sbiw	r26, 0x08	; 8
+   68468:	89 81       	ldd	r24, Y+1	; 0x01
+   6846a:	9a 81       	ldd	r25, Y+2	; 0x02
+   6846c:	fc 01       	movw	r30, r24
+   6846e:	85 a5       	ldd	r24, Z+45	; 0x2d
+   68470:	96 a5       	ldd	r25, Z+46	; 0x2e
+   68472:	28 0f       	add	r18, r24
+   68474:	39 1f       	adc	r19, r25
+   68476:	8b 81       	ldd	r24, Y+3	; 0x03
+   68478:	9c 81       	ldd	r25, Y+4	; 0x04
+   6847a:	82 17       	cp	r24, r18
+   6847c:	93 07       	cpc	r25, r19
+   6847e:	00 f4       	brcc	.+0      	; 0x68480 <_ZN14ResourceSystem10checkCacheEj+0x62>
+   68480:	00 c0       	rjmp	.+0      	; 0x68482 <_ZN14ResourceSystem10checkCacheEj+0x64>
+   68482:	89 81       	ldd	r24, Y+1	; 0x01
+   68484:	9a 81       	ldd	r25, Y+2	; 0x02
+   68486:	dc 01       	movw	r26, r24
+   68488:	8d 91       	ld	r24, X+
+   6848a:	9c 91       	ld	r25, X
+   6848c:	0e 96       	adiw	r24, 0x0e	; 14
+   6848e:	fc 01       	movw	r30, r24
+   68490:	20 81       	ld	r18, Z
+   68492:	31 81       	ldd	r19, Z+1	; 0x01
+   68494:	89 81       	ldd	r24, Y+1	; 0x01
+   68496:	9a 81       	ldd	r25, Y+2	; 0x02
+   68498:	f9 01       	movw	r30, r18
+   6849a:	09 95       	icall
+   6849c:	89 81       	ldd	r24, Y+1	; 0x01
+   6849e:	9a 81       	ldd	r25, Y+2	; 0x02
+   684a0:	dc 01       	movw	r26, r24
+   684a2:	8d 91       	ld	r24, X+
+   684a4:	9c 91       	ld	r25, X
+   684a6:	40 96       	adiw	r24, 0x10	; 16
+   684a8:	dc 01       	movw	r26, r24
+   684aa:	ed 91       	ld	r30, X+
+   684ac:	fc 91       	ld	r31, X
+   684ae:	89 81       	ldd	r24, Y+1	; 0x01
+   684b0:	9a 81       	ldd	r25, Y+2	; 0x02
+   684b2:	ac 01       	movw	r20, r24
+   684b4:	47 5f       	subi	r20, 0xF7	; 247
+   684b6:	5f 4f       	sbci	r21, 0xFF	; 255
+   684b8:	6b 81       	ldd	r22, Y+3	; 0x03
+   684ba:	7c 81       	ldd	r23, Y+4	; 0x04
+   684bc:	89 81       	ldd	r24, Y+1	; 0x01
+   684be:	9a 81       	ldd	r25, Y+2	; 0x02
+   684c0:	20 e2       	ldi	r18, 0x20	; 32
+   684c2:	30 e0       	ldi	r19, 0x00	; 0
+   684c4:	09 95       	icall
+   684c6:	9c 01       	movw	r18, r24
+   684c8:	89 81       	ldd	r24, Y+1	; 0x01
+   684ca:	9a 81       	ldd	r25, Y+2	; 0x02
+   684cc:	fc 01       	movw	r30, r24
+   684ce:	36 a7       	std	Z+46, r19	; 0x2e
+   684d0:	25 a7       	std	Z+45, r18	; 0x2d
+   684d2:	89 81       	ldd	r24, Y+1	; 0x01
+   684d4:	9a 81       	ldd	r25, Y+2	; 0x02
+   684d6:	2b 81       	ldd	r18, Y+3	; 0x03
+   684d8:	3c 81       	ldd	r19, Y+4	; 0x04
+   684da:	dc 01       	movw	r26, r24
+   684dc:	18 96       	adiw	r26, 0x08	; 8
+   684de:	3c 93       	st	X, r19
+   684e0:	2e 93       	st	-X, r18
+   684e2:	17 97       	sbiw	r26, 0x07	; 7
+   684e4:	89 81       	ldd	r24, Y+1	; 0x01
+   684e6:	9a 81       	ldd	r25, Y+2	; 0x02
+   684e8:	fc 01       	movw	r30, r24
+   684ea:	15 82       	std	Z+5, r1	; 0x05
+   684ec:	89 81       	ldd	r24, Y+1	; 0x01
+   684ee:	9a 81       	ldd	r25, Y+2	; 0x02
+   684f0:	21 e0       	ldi	r18, 0x01	; 1
+   684f2:	dc 01       	movw	r26, r24
+   684f4:	16 96       	adiw	r26, 0x06	; 6
+   684f6:	2c 93       	st	X, r18
+   684f8:	89 81       	ldd	r24, Y+1	; 0x01
+   684fa:	9a 81       	ldd	r25, Y+2	; 0x02
+   684fc:	fc 01       	movw	r30, r24
+   684fe:	81 a5       	ldd	r24, Z+41	; 0x29
+   68500:	92 a5       	ldd	r25, Z+42	; 0x2a
+   68502:	9c 01       	movw	r18, r24
+   68504:	2f 5f       	subi	r18, 0xFF	; 255
+   68506:	3f 4f       	sbci	r19, 0xFF	; 255
+   68508:	89 81       	ldd	r24, Y+1	; 0x01
+   6850a:	9a 81       	ldd	r25, Y+2	; 0x02
+   6850c:	dc 01       	movw	r26, r24
+   6850e:	9a 96       	adiw	r26, 0x2a	; 42
+   68510:	3c 93       	st	X, r19
+   68512:	2e 93       	st	-X, r18
+   68514:	99 97       	sbiw	r26, 0x29	; 41
+   68516:	00 c0       	rjmp	.+0      	; 0x68518 <_ZN14ResourceSystem10checkCacheEj+0xfa>
+   68518:	89 81       	ldd	r24, Y+1	; 0x01
+   6851a:	9a 81       	ldd	r25, Y+2	; 0x02
+   6851c:	fc 01       	movw	r30, r24
+   6851e:	83 a5       	ldd	r24, Z+43	; 0x2b
+   68520:	94 a5       	ldd	r25, Z+44	; 0x2c
+   68522:	9c 01       	movw	r18, r24
+   68524:	2f 5f       	subi	r18, 0xFF	; 255
+   68526:	3f 4f       	sbci	r19, 0xFF	; 255
+   68528:	89 81       	ldd	r24, Y+1	; 0x01
+   6852a:	9a 81       	ldd	r25, Y+2	; 0x02
+   6852c:	dc 01       	movw	r26, r24
+   6852e:	9c 96       	adiw	r26, 0x2c	; 44
+   68530:	3c 93       	st	X, r19
+   68532:	2e 93       	st	-X, r18
+   68534:	9b 97       	sbiw	r26, 0x2b	; 43
+   68536:	0f 90       	pop	r0
+   68538:	0f 90       	pop	r0
+   6853a:	0f 90       	pop	r0
+   6853c:	0f 90       	pop	r0
+   6853e:	df 91       	pop	r29
+   68540:	cf 91       	pop	r28
+   68542:	08 95       	ret
+
+Resource.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         00000c24  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      00001b5d  00000000  00000000  00000c58  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .text._ZN8ResourceC2EhP6rbfs_t 00000048  00000000  00000000  000027b5  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text._ZN8Resource4openENS_11OpenOptionsE 0000005c  00000000  00000000  000027fd  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text._ZN8Resource5closeEv 00000054  00000000  00000000  00002859  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .text._ZN8Resource5writeEh 00000044  00000000  00000000  000028ad  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .text._ZN8Resource10writeBytesEPhi 0000007e  00000000  00000000  000028f1  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 10 .text._ZN8Resource4readEv 00000048  00000000  00000000  0000296f  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 11 .text._ZN8Resource9readBytesEPhi 000000ba  00000000  00000000  000029b7  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 12 .text._ZN8Resource4seekENS_18ResourceSeekOriginEj 00000060  00000000  00000000  00002a71  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 13 .text._ZN8Resource8truncateEv 0000004c  00000000  00000000  00002ad1  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 14 .text._ZN8Resource4syncEv 00000032  00000000  00000000  00002b1d  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 15 .text._ZN8Resource6rewindEv 0000004c  00000000  00000000  00002b4f  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 16 .text._ZN8Resource7releaseEv 0000003a  00000000  00000000  00002b9b  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 17 .text._ZN8Resource4sizeEv 00000022  00000000  00000000  00002bd5  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 18 .text._ZN8Resource4tellEv 00000022  00000000  00000000  00002bf7  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 19 .text._ZN8Resource3eorEv 0000002c  00000000  00000000  00002c19  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 20 .text._ZN8Resource5errorEv 0000002c  00000000  00000000  00002c45  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 21 .text._ZN8Resource10isReadOnlyEv 00000038  00000000  00000000  00002c71  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 22 .comment      00000012  00000000  00000000  00002ca9  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text._ZN8ResourceC2EhP6rbfs_t:
+
+00000000 <_ZN8ResourceC1EhP6rbfs_t>:
+
+bool Resource::error() {
+    return (rbfs_error(&resource) != 0);
+}
+
+bool Resource::isReadOnly() {
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	00 d0       	rcall	.+0      	; 0x6 <_ZN8ResourceC1EhP6rbfs_t+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <_ZN8ResourceC1EhP6rbfs_t+0x8>
+   8:	1f 92       	push	r1
+   a:	cd b7       	in	r28, 0x3d	; 61
+   c:	de b7       	in	r29, 0x3e	; 62
+    return (rbfs->flags & RBFS_RESOURCE_FLAG_BIT_READ_ONLY) != 0;
+   e:	9a 83       	std	Y+2, r25	; 0x02
+  10:	89 83       	std	Y+1, r24	; 0x01
+  12:	6b 83       	std	Y+3, r22	; 0x03
+  14:	5d 83       	std	Y+5, r21	; 0x05
+  16:	4c 83       	std	Y+4, r20	; 0x04
+  18:	89 81       	ldd	r24, Y+1	; 0x01
+  1a:	9a 81       	ldd	r25, Y+2	; 0x02
+  1c:	2b 81       	ldd	r18, Y+3	; 0x03
+  1e:	fc 01       	movw	r30, r24
+  20:	20 83       	st	Z, r18
+  22:	89 81       	ldd	r24, Y+1	; 0x01
+  24:	9a 81       	ldd	r25, Y+2	; 0x02
+  26:	2c 81       	ldd	r18, Y+4	; 0x04
+  28:	3d 81       	ldd	r19, Y+5	; 0x05
+  2a:	fc 01       	movw	r30, r24
+  2c:	33 87       	std	Z+11, r19	; 0x0b
+}
+  2e:	22 87       	std	Z+10, r18	; 0x0a
+  30:	89 81       	ldd	r24, Y+1	; 0x01
+  32:	9a 81       	ldd	r25, Y+2	; 0x02
+  34:	fc 01       	movw	r30, r24
+  36:	14 86       	std	Z+12, r1	; 0x0c
+  38:	0f 90       	pop	r0
+  3a:	0f 90       	pop	r0
+  3c:	0f 90       	pop	r0
+  3e:	0f 90       	pop	r0
+  40:	0f 90       	pop	r0
+  42:	df 91       	pop	r29
+  44:	cf 91       	pop	r28
+  46:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4openENS_11OpenOptionsE:
+
+00000048 <_ZN8Resource4openENS_11OpenOptionsE>:
+  48:	cf 93       	push	r28
+  4a:	df 93       	push	r29
+  4c:	00 d0       	rcall	.+0      	; 0x4e <_ZN8Resource4openENS_11OpenOptionsE+0x6>
+  4e:	1f 92       	push	r1
+  50:	cd b7       	in	r28, 0x3d	; 61
+  52:	de b7       	in	r29, 0x3e	; 62
+  54:	9a 83       	std	Y+2, r25	; 0x02
+  56:	89 83       	std	Y+1, r24	; 0x01
+  58:	6b 83       	std	Y+3, r22	; 0x03
+  5a:	89 81       	ldd	r24, Y+1	; 0x01
+  5c:	9a 81       	ldd	r25, Y+2	; 0x02
+  5e:	ac 01       	movw	r20, r24
+  60:	4f 5f       	subi	r20, 0xFF	; 255
+  62:	5f 4f       	sbci	r21, 0xFF	; 255
+  64:	89 81       	ldd	r24, Y+1	; 0x01
+  66:	9a 81       	ldd	r25, Y+2	; 0x02
+  68:	fc 01       	movw	r30, r24
+  6a:	30 81       	ld	r19, Z
+  6c:	89 81       	ldd	r24, Y+1	; 0x01
+  6e:	9a 81       	ldd	r25, Y+2	; 0x02
+  70:	fc 01       	movw	r30, r24
+  72:	82 85       	ldd	r24, Z+10	; 0x0a
+  74:	93 85       	ldd	r25, Z+11	; 0x0b
+  76:	2b 81       	ldd	r18, Y+3	; 0x03
+  78:	63 2f       	mov	r22, r19
+  7a:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+  7e:	28 2f       	mov	r18, r24
+  80:	89 81       	ldd	r24, Y+1	; 0x01
+  82:	9a 81       	ldd	r25, Y+2	; 0x02
+  84:	fc 01       	movw	r30, r24
+  86:	24 87       	std	Z+12, r18	; 0x0c
+  88:	89 81       	ldd	r24, Y+1	; 0x01
+  8a:	9a 81       	ldd	r25, Y+2	; 0x02
+  8c:	fc 01       	movw	r30, r24
+  8e:	94 85       	ldd	r25, Z+12	; 0x0c
+  90:	81 e0       	ldi	r24, 0x01	; 1
+  92:	99 23       	and	r25, r25
+  94:	01 f0       	breq	.+0      	; 0x96 <_ZN8Resource4openENS_11OpenOptionsE+0x4e>
+  96:	80 e0       	ldi	r24, 0x00	; 0
+  98:	0f 90       	pop	r0
+  9a:	0f 90       	pop	r0
+  9c:	0f 90       	pop	r0
+  9e:	df 91       	pop	r29
+  a0:	cf 91       	pop	r28
+  a2:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource5closeEv:
+
+000000ec <_ZN8Resource5closeEv>:
+  ec:	cf 93       	push	r28
+  ee:	df 93       	push	r29
+  f0:	00 d0       	rcall	.+0      	; 0xf2 <_ZN8Resource5closeEv+0x6>
+  f2:	cd b7       	in	r28, 0x3d	; 61
+  f4:	de b7       	in	r29, 0x3e	; 62
+  f6:	9a 83       	std	Y+2, r25	; 0x02
+  f8:	89 83       	std	Y+1, r24	; 0x01
+  fa:	89 81       	ldd	r24, Y+1	; 0x01
+  fc:	9a 81       	ldd	r25, Y+2	; 0x02
+  fe:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 102:	89 81       	ldd	r24, Y+1	; 0x01
+ 104:	9a 81       	ldd	r25, Y+2	; 0x02
+ 106:	9c 01       	movw	r18, r24
+ 108:	2f 5f       	subi	r18, 0xFF	; 255
+ 10a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 10c:	89 81       	ldd	r24, Y+1	; 0x01
+ 10e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 110:	fc 01       	movw	r30, r24
+ 112:	82 85       	ldd	r24, Z+10	; 0x0a
+ 114:	93 85       	ldd	r25, Z+11	; 0x0b
+ 116:	b9 01       	movw	r22, r18
+ 118:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 11c:	28 2f       	mov	r18, r24
+ 11e:	89 81       	ldd	r24, Y+1	; 0x01
+ 120:	9a 81       	ldd	r25, Y+2	; 0x02
+ 122:	fc 01       	movw	r30, r24
+ 124:	24 87       	std	Z+12, r18	; 0x0c
+ 126:	89 81       	ldd	r24, Y+1	; 0x01
+ 128:	9a 81       	ldd	r25, Y+2	; 0x02
+ 12a:	fc 01       	movw	r30, r24
+ 12c:	94 85       	ldd	r25, Z+12	; 0x0c
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
+ 130:	99 23       	and	r25, r25
+ 132:	01 f0       	breq	.+0      	; 0x134 <_ZN8Resource5closeEv+0x48>
+ 134:	80 e0       	ldi	r24, 0x00	; 0
+ 136:	0f 90       	pop	r0
+ 138:	0f 90       	pop	r0
+ 13a:	df 91       	pop	r29
+ 13c:	cf 91       	pop	r28
+ 13e:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource5writeEh:
+
+0000022c <_ZN8Resource5writeEh>:
+ 22c:	cf 93       	push	r28
+ 22e:	df 93       	push	r29
+ 230:	00 d0       	rcall	.+0      	; 0x232 <_ZN8Resource5writeEh+0x6>
+ 232:	1f 92       	push	r1
+ 234:	cd b7       	in	r28, 0x3d	; 61
+ 236:	de b7       	in	r29, 0x3e	; 62
+ 238:	9a 83       	std	Y+2, r25	; 0x02
+ 23a:	89 83       	std	Y+1, r24	; 0x01
+ 23c:	6b 83       	std	Y+3, r22	; 0x03
+ 23e:	89 81       	ldd	r24, Y+1	; 0x01
+ 240:	9a 81       	ldd	r25, Y+2	; 0x02
+ 242:	9c 01       	movw	r18, r24
+ 244:	2f 5f       	subi	r18, 0xFF	; 255
+ 246:	3f 4f       	sbci	r19, 0xFF	; 255
+ 248:	89 81       	ldd	r24, Y+1	; 0x01
+ 24a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 24c:	fc 01       	movw	r30, r24
+ 24e:	82 85       	ldd	r24, Z+10	; 0x0a
+ 250:	93 85       	ldd	r25, Z+11	; 0x0b
+ 252:	4b 81       	ldd	r20, Y+3	; 0x03
+ 254:	b9 01       	movw	r22, r18
+ 256:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 25a:	28 2f       	mov	r18, r24
+ 25c:	89 81       	ldd	r24, Y+1	; 0x01
+ 25e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 260:	fc 01       	movw	r30, r24
+ 262:	24 87       	std	Z+12, r18	; 0x0c
+ 264:	0f 90       	pop	r0
+ 266:	0f 90       	pop	r0
+ 268:	0f 90       	pop	r0
+ 26a:	df 91       	pop	r29
+ 26c:	cf 91       	pop	r28
+ 26e:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource10writeBytesEPhi:
+
+0000049c <_ZN8Resource10writeBytesEPhi>:
+ 49c:	cf 93       	push	r28
+ 49e:	df 93       	push	r29
+ 4a0:	cd b7       	in	r28, 0x3d	; 61
+ 4a2:	de b7       	in	r29, 0x3e	; 62
+ 4a4:	28 97       	sbiw	r28, 0x08	; 8
+ 4a6:	0f b6       	in	r0, 0x3f	; 63
+ 4a8:	f8 94       	cli
+ 4aa:	de bf       	out	0x3e, r29	; 62
+ 4ac:	0f be       	out	0x3f, r0	; 63
+ 4ae:	cd bf       	out	0x3d, r28	; 61
+ 4b0:	9c 83       	std	Y+4, r25	; 0x04
+ 4b2:	8b 83       	std	Y+3, r24	; 0x03
+ 4b4:	7e 83       	std	Y+6, r23	; 0x06
+ 4b6:	6d 83       	std	Y+5, r22	; 0x05
+ 4b8:	58 87       	std	Y+8, r21	; 0x08
+ 4ba:	4f 83       	std	Y+7, r20	; 0x07
+ 4bc:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4be:	9c 81       	ldd	r25, Y+4	; 0x04
+ 4c0:	fc 01       	movw	r30, r24
+ 4c2:	14 86       	std	Z+12, r1	; 0x0c
+ 4c4:	1a 82       	std	Y+2, r1	; 0x02
+ 4c6:	19 82       	std	Y+1, r1	; 0x01
+ 4c8:	00 c0       	rjmp	.+0      	; 0x4ca <_ZN8Resource10writeBytesEPhi+0x2e>
+ 4ca:	89 81       	ldd	r24, Y+1	; 0x01
+ 4cc:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4ce:	2d 81       	ldd	r18, Y+5	; 0x05
+ 4d0:	3e 81       	ldd	r19, Y+6	; 0x06
+ 4d2:	82 0f       	add	r24, r18
+ 4d4:	93 1f       	adc	r25, r19
+ 4d6:	fc 01       	movw	r30, r24
+ 4d8:	20 81       	ld	r18, Z
+ 4da:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4dc:	9c 81       	ldd	r25, Y+4	; 0x04
+ 4de:	62 2f       	mov	r22, r18
+ 4e0:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 4e4:	89 81       	ldd	r24, Y+1	; 0x01
+ 4e6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4e8:	01 96       	adiw	r24, 0x01	; 1
+ 4ea:	9a 83       	std	Y+2, r25	; 0x02
+ 4ec:	89 83       	std	Y+1, r24	; 0x01
+ 4ee:	29 81       	ldd	r18, Y+1	; 0x01
+ 4f0:	3a 81       	ldd	r19, Y+2	; 0x02
+ 4f2:	8f 81       	ldd	r24, Y+7	; 0x07
+ 4f4:	98 85       	ldd	r25, Y+8	; 0x08
+ 4f6:	28 17       	cp	r18, r24
+ 4f8:	39 07       	cpc	r19, r25
+ 4fa:	04 f4       	brge	.+0      	; 0x4fc <_ZN8Resource10writeBytesEPhi+0x60>
+ 4fc:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4fe:	9c 81       	ldd	r25, Y+4	; 0x04
+ 500:	fc 01       	movw	r30, r24
+ 502:	84 85       	ldd	r24, Z+12	; 0x0c
+ 504:	88 23       	and	r24, r24
+ 506:	01 f0       	breq	.+0      	; 0x508 <_ZN8Resource10writeBytesEPhi+0x6c>
+ 508:	28 96       	adiw	r28, 0x08	; 8
+ 50a:	0f b6       	in	r0, 0x3f	; 63
+ 50c:	f8 94       	cli
+ 50e:	de bf       	out	0x3e, r29	; 62
+ 510:	0f be       	out	0x3f, r0	; 63
+ 512:	cd bf       	out	0x3d, r28	; 61
+ 514:	df 91       	pop	r29
+ 516:	cf 91       	pop	r28
+ 518:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4readEv:
+
+000009b6 <_ZN8Resource4readEv>:
+ 9b6:	cf 93       	push	r28
+ 9b8:	df 93       	push	r29
+ 9ba:	00 d0       	rcall	.+0      	; 0x9bc <_ZN8Resource4readEv+0x6>
+ 9bc:	cd b7       	in	r28, 0x3d	; 61
+ 9be:	de b7       	in	r29, 0x3e	; 62
+ 9c0:	9a 83       	std	Y+2, r25	; 0x02
+ 9c2:	89 83       	std	Y+1, r24	; 0x01
+ 9c4:	89 81       	ldd	r24, Y+1	; 0x01
+ 9c6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 9c8:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 9cc:	88 23       	and	r24, r24
+ 9ce:	01 f0       	breq	.+0      	; 0x9d0 <_ZN8Resource4readEv+0x1a>
+ 9d0:	8f ef       	ldi	r24, 0xFF	; 255
+ 9d2:	9f ef       	ldi	r25, 0xFF	; 255
+ 9d4:	00 c0       	rjmp	.+0      	; 0x9d6 <_ZN8Resource4readEv+0x20>
+ 9d6:	89 81       	ldd	r24, Y+1	; 0x01
+ 9d8:	9a 81       	ldd	r25, Y+2	; 0x02
+ 9da:	9c 01       	movw	r18, r24
+ 9dc:	2f 5f       	subi	r18, 0xFF	; 255
+ 9de:	3f 4f       	sbci	r19, 0xFF	; 255
+ 9e0:	89 81       	ldd	r24, Y+1	; 0x01
+ 9e2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 9e4:	fc 01       	movw	r30, r24
+ 9e6:	82 85       	ldd	r24, Z+10	; 0x0a
+ 9e8:	93 85       	ldd	r25, Z+11	; 0x0b
+ 9ea:	b9 01       	movw	r22, r18
+ 9ec:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+ 9f0:	88 2f       	mov	r24, r24
+ 9f2:	90 e0       	ldi	r25, 0x00	; 0
+ 9f4:	0f 90       	pop	r0
+ 9f6:	0f 90       	pop	r0
+ 9f8:	df 91       	pop	r29
+ 9fa:	cf 91       	pop	r28
+ 9fc:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource9readBytesEPhi:
+
+000013b4 <_ZN8Resource9readBytesEPhi>:
+    13b4:	cf 93       	push	r28
+    13b6:	df 93       	push	r29
+    13b8:	cd b7       	in	r28, 0x3d	; 61
+    13ba:	de b7       	in	r29, 0x3e	; 62
+    13bc:	2a 97       	sbiw	r28, 0x0a	; 10
+    13be:	0f b6       	in	r0, 0x3f	; 63
+    13c0:	f8 94       	cli
+    13c2:	de bf       	out	0x3e, r29	; 62
+    13c4:	0f be       	out	0x3f, r0	; 63
+    13c6:	cd bf       	out	0x3d, r28	; 61
+    13c8:	9e 83       	std	Y+6, r25	; 0x06
+    13ca:	8d 83       	std	Y+5, r24	; 0x05
+    13cc:	78 87       	std	Y+8, r23	; 0x08
+    13ce:	6f 83       	std	Y+7, r22	; 0x07
+    13d0:	5a 87       	std	Y+10, r21	; 0x0a
+    13d2:	49 87       	std	Y+9, r20	; 0x09
+    13d4:	8f 81       	ldd	r24, Y+7	; 0x07
+    13d6:	98 85       	ldd	r25, Y+8	; 0x08
+    13d8:	00 97       	sbiw	r24, 0x00	; 0
+    13da:	01 f4       	brne	.+0      	; 0x13dc <_ZN8Resource9readBytesEPhi+0x28>
+    13dc:	80 e0       	ldi	r24, 0x00	; 0
+    13de:	90 e0       	ldi	r25, 0x00	; 0
+    13e0:	00 c0       	rjmp	.+0      	; 0x13e2 <_ZN8Resource9readBytesEPhi+0x2e>
+    13e2:	8d 81       	ldd	r24, Y+5	; 0x05
+    13e4:	9e 81       	ldd	r25, Y+6	; 0x06
+    13e6:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    13ea:	9c 83       	std	Y+4, r25	; 0x04
+    13ec:	8b 83       	std	Y+3, r24	; 0x03
+    13ee:	8b 81       	ldd	r24, Y+3	; 0x03
+    13f0:	9c 81       	ldd	r25, Y+4	; 0x04
+    13f2:	8f 3f       	cpi	r24, 0xFF	; 255
+    13f4:	2f ef       	ldi	r18, 0xFF	; 255
+    13f6:	92 07       	cpc	r25, r18
+    13f8:	01 f4       	brne	.+0      	; 0x13fa <_ZN8Resource9readBytesEPhi+0x46>
+    13fa:	8f ef       	ldi	r24, 0xFF	; 255
+    13fc:	9f ef       	ldi	r25, 0xFF	; 255
+    13fe:	00 c0       	rjmp	.+0      	; 0x1400 <_ZN8Resource9readBytesEPhi+0x4c>
+    1400:	2b 81       	ldd	r18, Y+3	; 0x03
+    1402:	8f 81       	ldd	r24, Y+7	; 0x07
+    1404:	98 85       	ldd	r25, Y+8	; 0x08
+    1406:	fc 01       	movw	r30, r24
+    1408:	20 83       	st	Z, r18
+    140a:	81 e0       	ldi	r24, 0x01	; 1
+    140c:	90 e0       	ldi	r25, 0x00	; 0
+    140e:	9a 83       	std	Y+2, r25	; 0x02
+    1410:	89 83       	std	Y+1, r24	; 0x01
+    1412:	00 c0       	rjmp	.+0      	; 0x1414 <_ZN8Resource9readBytesEPhi+0x60>
+    1414:	8d 81       	ldd	r24, Y+5	; 0x05
+    1416:	9e 81       	ldd	r25, Y+6	; 0x06
+    1418:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    141c:	9c 83       	std	Y+4, r25	; 0x04
+    141e:	8b 83       	std	Y+3, r24	; 0x03
+    1420:	8b 81       	ldd	r24, Y+3	; 0x03
+    1422:	9c 81       	ldd	r25, Y+4	; 0x04
+    1424:	8f 3f       	cpi	r24, 0xFF	; 255
+    1426:	ff ef       	ldi	r31, 0xFF	; 255
+    1428:	9f 07       	cpc	r25, r31
+    142a:	01 f4       	brne	.+0      	; 0x142c <_ZN8Resource9readBytesEPhi+0x78>
+    142c:	00 c0       	rjmp	.+0      	; 0x142e <_ZN8Resource9readBytesEPhi+0x7a>
+    142e:	89 81       	ldd	r24, Y+1	; 0x01
+    1430:	9a 81       	ldd	r25, Y+2	; 0x02
+    1432:	2f 81       	ldd	r18, Y+7	; 0x07
+    1434:	38 85       	ldd	r19, Y+8	; 0x08
+    1436:	82 0f       	add	r24, r18
+    1438:	93 1f       	adc	r25, r19
+    143a:	2b 81       	ldd	r18, Y+3	; 0x03
+    143c:	fc 01       	movw	r30, r24
+    143e:	20 83       	st	Z, r18
+    1440:	89 81       	ldd	r24, Y+1	; 0x01
+    1442:	9a 81       	ldd	r25, Y+2	; 0x02
+    1444:	01 96       	adiw	r24, 0x01	; 1
+    1446:	9a 83       	std	Y+2, r25	; 0x02
+    1448:	89 83       	std	Y+1, r24	; 0x01
+    144a:	29 81       	ldd	r18, Y+1	; 0x01
+    144c:	3a 81       	ldd	r19, Y+2	; 0x02
+    144e:	89 85       	ldd	r24, Y+9	; 0x09
+    1450:	9a 85       	ldd	r25, Y+10	; 0x0a
+    1452:	28 17       	cp	r18, r24
+    1454:	39 07       	cpc	r19, r25
+    1456:	04 f0       	brlt	.+0      	; 0x1458 <_ZN8Resource9readBytesEPhi+0xa4>
+    1458:	89 81       	ldd	r24, Y+1	; 0x01
+    145a:	9a 81       	ldd	r25, Y+2	; 0x02
+    145c:	2a 96       	adiw	r28, 0x0a	; 10
+    145e:	0f b6       	in	r0, 0x3f	; 63
+    1460:	f8 94       	cli
+    1462:	de bf       	out	0x3e, r29	; 62
+    1464:	0f be       	out	0x3f, r0	; 63
+    1466:	cd bf       	out	0x3d, r28	; 61
+    1468:	df 91       	pop	r29
+    146a:	cf 91       	pop	r28
+    146c:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4seekENS_18ResourceSeekOriginEj:
+
+00002822 <_ZN8Resource4seekENS_18ResourceSeekOriginEj>:
+    2822:	cf 93       	push	r28
+    2824:	df 93       	push	r29
+    2826:	00 d0       	rcall	.+0      	; 0x2828 <_ZN8Resource4seekENS_18ResourceSeekOriginEj+0x6>
+    2828:	00 d0       	rcall	.+0      	; 0x282a <_ZN8Resource4seekENS_18ResourceSeekOriginEj+0x8>
+    282a:	1f 92       	push	r1
+    282c:	cd b7       	in	r28, 0x3d	; 61
+    282e:	de b7       	in	r29, 0x3e	; 62
+    2830:	9a 83       	std	Y+2, r25	; 0x02
+    2832:	89 83       	std	Y+1, r24	; 0x01
+    2834:	6b 83       	std	Y+3, r22	; 0x03
+    2836:	5d 83       	std	Y+5, r21	; 0x05
+    2838:	4c 83       	std	Y+4, r20	; 0x04
+    283a:	89 81       	ldd	r24, Y+1	; 0x01
+    283c:	9a 81       	ldd	r25, Y+2	; 0x02
+    283e:	bc 01       	movw	r22, r24
+    2840:	6f 5f       	subi	r22, 0xFF	; 255
+    2842:	7f 4f       	sbci	r23, 0xFF	; 255
+    2844:	89 81       	ldd	r24, Y+1	; 0x01
+    2846:	9a 81       	ldd	r25, Y+2	; 0x02
+    2848:	fc 01       	movw	r30, r24
+    284a:	82 85       	ldd	r24, Z+10	; 0x0a
+    284c:	93 85       	ldd	r25, Z+11	; 0x0b
+    284e:	2c 81       	ldd	r18, Y+4	; 0x04
+    2850:	3d 81       	ldd	r19, Y+5	; 0x05
+    2852:	4b 81       	ldd	r20, Y+3	; 0x03
+    2854:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    2858:	28 2f       	mov	r18, r24
+    285a:	89 81       	ldd	r24, Y+1	; 0x01
+    285c:	9a 81       	ldd	r25, Y+2	; 0x02
+    285e:	fc 01       	movw	r30, r24
+    2860:	24 87       	std	Z+12, r18	; 0x0c
+    2862:	89 81       	ldd	r24, Y+1	; 0x01
+    2864:	9a 81       	ldd	r25, Y+2	; 0x02
+    2866:	fc 01       	movw	r30, r24
+    2868:	94 85       	ldd	r25, Z+12	; 0x0c
+    286a:	81 e0       	ldi	r24, 0x01	; 1
+    286c:	99 23       	and	r25, r25
+    286e:	01 f0       	breq	.+0      	; 0x2870 <_ZN8Resource4seekENS_18ResourceSeekOriginEj+0x4e>
+    2870:	80 e0       	ldi	r24, 0x00	; 0
+    2872:	0f 90       	pop	r0
+    2874:	0f 90       	pop	r0
+    2876:	0f 90       	pop	r0
+    2878:	0f 90       	pop	r0
+    287a:	0f 90       	pop	r0
+    287c:	df 91       	pop	r29
+    287e:	cf 91       	pop	r28
+    2880:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource8truncateEv:
+
+000050a4 <_ZN8Resource8truncateEv>:
+    50a4:	cf 93       	push	r28
+    50a6:	df 93       	push	r29
+    50a8:	00 d0       	rcall	.+0      	; 0x50aa <_ZN8Resource8truncateEv+0x6>
+    50aa:	cd b7       	in	r28, 0x3d	; 61
+    50ac:	de b7       	in	r29, 0x3e	; 62
+    50ae:	9a 83       	std	Y+2, r25	; 0x02
+    50b0:	89 83       	std	Y+1, r24	; 0x01
+    50b2:	89 81       	ldd	r24, Y+1	; 0x01
+    50b4:	9a 81       	ldd	r25, Y+2	; 0x02
+    50b6:	9c 01       	movw	r18, r24
+    50b8:	2f 5f       	subi	r18, 0xFF	; 255
+    50ba:	3f 4f       	sbci	r19, 0xFF	; 255
+    50bc:	89 81       	ldd	r24, Y+1	; 0x01
+    50be:	9a 81       	ldd	r25, Y+2	; 0x02
+    50c0:	fc 01       	movw	r30, r24
+    50c2:	82 85       	ldd	r24, Z+10	; 0x0a
+    50c4:	93 85       	ldd	r25, Z+11	; 0x0b
+    50c6:	b9 01       	movw	r22, r18
+    50c8:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    50cc:	28 2f       	mov	r18, r24
+    50ce:	89 81       	ldd	r24, Y+1	; 0x01
+    50d0:	9a 81       	ldd	r25, Y+2	; 0x02
+    50d2:	fc 01       	movw	r30, r24
+    50d4:	24 87       	std	Z+12, r18	; 0x0c
+    50d6:	89 81       	ldd	r24, Y+1	; 0x01
+    50d8:	9a 81       	ldd	r25, Y+2	; 0x02
+    50da:	fc 01       	movw	r30, r24
+    50dc:	94 85       	ldd	r25, Z+12	; 0x0c
+    50de:	81 e0       	ldi	r24, 0x01	; 1
+    50e0:	99 23       	and	r25, r25
+    50e2:	01 f0       	breq	.+0      	; 0x50e4 <_ZN8Resource8truncateEv+0x40>
+    50e4:	80 e0       	ldi	r24, 0x00	; 0
+    50e6:	0f 90       	pop	r0
+    50e8:	0f 90       	pop	r0
+    50ea:	df 91       	pop	r29
+    50ec:	cf 91       	pop	r28
+    50ee:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4syncEv:
+
+0000a194 <_ZN8Resource4syncEv>:
+    a194:	cf 93       	push	r28
+    a196:	df 93       	push	r29
+    a198:	00 d0       	rcall	.+0      	; 0xa19a <_ZN8Resource4syncEv+0x6>
+    a19a:	cd b7       	in	r28, 0x3d	; 61
+    a19c:	de b7       	in	r29, 0x3e	; 62
+    a19e:	9a 83       	std	Y+2, r25	; 0x02
+    a1a0:	89 83       	std	Y+1, r24	; 0x01
+    a1a2:	89 81       	ldd	r24, Y+1	; 0x01
+    a1a4:	9a 81       	ldd	r25, Y+2	; 0x02
+    a1a6:	9c 01       	movw	r18, r24
+    a1a8:	2f 5f       	subi	r18, 0xFF	; 255
+    a1aa:	3f 4f       	sbci	r19, 0xFF	; 255
+    a1ac:	89 81       	ldd	r24, Y+1	; 0x01
+    a1ae:	9a 81       	ldd	r25, Y+2	; 0x02
+    a1b0:	fc 01       	movw	r30, r24
+    a1b2:	82 85       	ldd	r24, Z+10	; 0x0a
+    a1b4:	93 85       	ldd	r25, Z+11	; 0x0b
+    a1b6:	b9 01       	movw	r22, r18
+    a1b8:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+    a1bc:	0f 90       	pop	r0
+    a1be:	0f 90       	pop	r0
+    a1c0:	df 91       	pop	r29
+    a1c2:	cf 91       	pop	r28
+    a1c4:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource6rewindEv:
+
+0001435a <_ZN8Resource6rewindEv>:
+   1435a:	cf 93       	push	r28
+   1435c:	df 93       	push	r29
+   1435e:	00 d0       	rcall	.+0      	; 0x14360 <_ZN8Resource6rewindEv+0x6>
+   14360:	cd b7       	in	r28, 0x3d	; 61
+   14362:	de b7       	in	r29, 0x3e	; 62
+   14364:	9a 83       	std	Y+2, r25	; 0x02
+   14366:	89 83       	std	Y+1, r24	; 0x01
+   14368:	89 81       	ldd	r24, Y+1	; 0x01
+   1436a:	9a 81       	ldd	r25, Y+2	; 0x02
+   1436c:	9c 01       	movw	r18, r24
+   1436e:	2f 5f       	subi	r18, 0xFF	; 255
+   14370:	3f 4f       	sbci	r19, 0xFF	; 255
+   14372:	89 81       	ldd	r24, Y+1	; 0x01
+   14374:	9a 81       	ldd	r25, Y+2	; 0x02
+   14376:	fc 01       	movw	r30, r24
+   14378:	82 85       	ldd	r24, Z+10	; 0x0a
+   1437a:	93 85       	ldd	r25, Z+11	; 0x0b
+   1437c:	b9 01       	movw	r22, r18
+   1437e:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   14382:	28 2f       	mov	r18, r24
+   14384:	89 81       	ldd	r24, Y+1	; 0x01
+   14386:	9a 81       	ldd	r25, Y+2	; 0x02
+   14388:	fc 01       	movw	r30, r24
+   1438a:	24 87       	std	Z+12, r18	; 0x0c
+   1438c:	89 81       	ldd	r24, Y+1	; 0x01
+   1438e:	9a 81       	ldd	r25, Y+2	; 0x02
+   14390:	fc 01       	movw	r30, r24
+   14392:	94 85       	ldd	r25, Z+12	; 0x0c
+   14394:	81 e0       	ldi	r24, 0x01	; 1
+   14396:	99 23       	and	r25, r25
+   14398:	01 f0       	breq	.+0      	; 0x1439a <_ZN8Resource6rewindEv+0x40>
+   1439a:	80 e0       	ldi	r24, 0x00	; 0
+   1439c:	0f 90       	pop	r0
+   1439e:	0f 90       	pop	r0
+   143a0:	df 91       	pop	r29
+   143a2:	cf 91       	pop	r28
+   143a4:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource7releaseEv:
+
+00028700 <_ZN8Resource7releaseEv>:
+   28700:	cf 93       	push	r28
+   28702:	df 93       	push	r29
+   28704:	00 d0       	rcall	.+0      	; 0x28706 <_ZN8Resource7releaseEv+0x6>
+   28706:	cd b7       	in	r28, 0x3d	; 61
+   28708:	de b7       	in	r29, 0x3e	; 62
+   2870a:	9a 83       	std	Y+2, r25	; 0x02
+   2870c:	89 83       	std	Y+1, r24	; 0x01
+   2870e:	89 81       	ldd	r24, Y+1	; 0x01
+   28710:	9a 81       	ldd	r25, Y+2	; 0x02
+   28712:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   28716:	89 81       	ldd	r24, Y+1	; 0x01
+   28718:	9a 81       	ldd	r25, Y+2	; 0x02
+   2871a:	9c 01       	movw	r18, r24
+   2871c:	2f 5f       	subi	r18, 0xFF	; 255
+   2871e:	3f 4f       	sbci	r19, 0xFF	; 255
+   28720:	89 81       	ldd	r24, Y+1	; 0x01
+   28722:	9a 81       	ldd	r25, Y+2	; 0x02
+   28724:	fc 01       	movw	r30, r24
+   28726:	82 85       	ldd	r24, Z+10	; 0x0a
+   28728:	93 85       	ldd	r25, Z+11	; 0x0b
+   2872a:	b9 01       	movw	r22, r18
+   2872c:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   28730:	0f 90       	pop	r0
+   28732:	0f 90       	pop	r0
+   28734:	df 91       	pop	r29
+   28736:	cf 91       	pop	r28
+   28738:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4sizeEv:
+
+00050e3a <_ZN8Resource4sizeEv>:
+   50e3a:	cf 93       	push	r28
+   50e3c:	df 93       	push	r29
+   50e3e:	00 d0       	rcall	.+0      	; 0x50e40 <_ZN8Resource4sizeEv+0x6>
+   50e40:	cd b7       	in	r28, 0x3d	; 61
+   50e42:	de b7       	in	r29, 0x3e	; 62
+   50e44:	9a 83       	std	Y+2, r25	; 0x02
+   50e46:	89 83       	std	Y+1, r24	; 0x01
+   50e48:	89 81       	ldd	r24, Y+1	; 0x01
+   50e4a:	9a 81       	ldd	r25, Y+2	; 0x02
+   50e4c:	01 96       	adiw	r24, 0x01	; 1
+   50e4e:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   50e52:	0f 90       	pop	r0
+   50e54:	0f 90       	pop	r0
+   50e56:	df 91       	pop	r29
+   50e58:	cf 91       	pop	r28
+   50e5a:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource4tellEv:
+
+000a1c96 <_ZN8Resource4tellEv>:
+   a1c96:	cf 93       	push	r28
+   a1c98:	df 93       	push	r29
+   a1c9a:	00 d0       	rcall	.+0      	; 0xa1c9c <_ZN8Resource4tellEv+0x6>
+   a1c9c:	cd b7       	in	r28, 0x3d	; 61
+   a1c9e:	de b7       	in	r29, 0x3e	; 62
+   a1ca0:	9a 83       	std	Y+2, r25	; 0x02
+   a1ca2:	89 83       	std	Y+1, r24	; 0x01
+   a1ca4:	89 81       	ldd	r24, Y+1	; 0x01
+   a1ca6:	9a 81       	ldd	r25, Y+2	; 0x02
+   a1ca8:	01 96       	adiw	r24, 0x01	; 1
+   a1caa:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+   a1cae:	0f 90       	pop	r0
+   a1cb0:	0f 90       	pop	r0
+   a1cb2:	df 91       	pop	r29
+   a1cb4:	cf 91       	pop	r28
+   a1cb6:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource3eorEv:
+
+0014394e <_ZN8Resource3eorEv>:
+  14394e:	cf 93       	push	r28
+  143950:	df 93       	push	r29
+  143952:	00 d0       	rcall	.+0      	; 0x143954 <_ZN8Resource3eorEv+0x6>
+  143954:	cd b7       	in	r28, 0x3d	; 61
+  143956:	de b7       	in	r29, 0x3e	; 62
+  143958:	9a 83       	std	Y+2, r25	; 0x02
+  14395a:	89 83       	std	Y+1, r24	; 0x01
+  14395c:	89 81       	ldd	r24, Y+1	; 0x01
+  14395e:	9a 81       	ldd	r25, Y+2	; 0x02
+  143960:	01 96       	adiw	r24, 0x01	; 1
+  143962:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+  143966:	98 2f       	mov	r25, r24
+  143968:	81 e0       	ldi	r24, 0x01	; 1
+  14396a:	99 23       	and	r25, r25
+  14396c:	01 f4       	brne	.+0      	; 0x14396e <_ZN8Resource3eorEv+0x20>
+  14396e:	80 e0       	ldi	r24, 0x00	; 0
+  143970:	0f 90       	pop	r0
+  143972:	0f 90       	pop	r0
+  143974:	df 91       	pop	r29
+  143976:	cf 91       	pop	r28
+  143978:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource5errorEv:
+
+002872c8 <_ZN8Resource5errorEv>:
+  2872c8:	cf 93       	push	r28
+  2872ca:	df 93       	push	r29
+  2872cc:	00 d0       	rcall	.+0      	; 0x2872ce <_ZN8Resource5errorEv+0x6>
+  2872ce:	cd b7       	in	r28, 0x3d	; 61
+  2872d0:	de b7       	in	r29, 0x3e	; 62
+  2872d2:	9a 83       	std	Y+2, r25	; 0x02
+  2872d4:	89 83       	std	Y+1, r24	; 0x01
+  2872d6:	89 81       	ldd	r24, Y+1	; 0x01
+  2872d8:	9a 81       	ldd	r25, Y+2	; 0x02
+  2872da:	01 96       	adiw	r24, 0x01	; 1
+  2872dc:	0e 94 00 00 	call	0	; 0x0 <__tmp_reg__>
+  2872e0:	98 2f       	mov	r25, r24
+  2872e2:	81 e0       	ldi	r24, 0x01	; 1
+  2872e4:	99 23       	and	r25, r25
+  2872e6:	01 f4       	brne	.+0      	; 0x2872e8 <_ZN8Resource5errorEv+0x20>
+  2872e8:	80 e0       	ldi	r24, 0x00	; 0
+  2872ea:	0f 90       	pop	r0
+  2872ec:	0f 90       	pop	r0
+  2872ee:	df 91       	pop	r29
+  2872f0:	cf 91       	pop	r28
+  2872f2:	08 95       	ret
+
+Disassembly of section .text._ZN8Resource10isReadOnlyEv:
+
+0050e5bc <_ZN8Resource10isReadOnlyEv>:
+  50e5bc:	cf 93       	push	r28
+  50e5be:	df 93       	push	r29
+  50e5c0:	00 d0       	rcall	.+0      	; 0x50e5c2 <_ZN8Resource10isReadOnlyEv+0x6>
+  50e5c2:	cd b7       	in	r28, 0x3d	; 61
+  50e5c4:	de b7       	in	r29, 0x3e	; 62
+  50e5c6:	9a 83       	std	Y+2, r25	; 0x02
+  50e5c8:	89 83       	std	Y+1, r24	; 0x01
+  50e5ca:	89 81       	ldd	r24, Y+1	; 0x01
+  50e5cc:	9a 81       	ldd	r25, Y+2	; 0x02
+  50e5ce:	fc 01       	movw	r30, r24
+  50e5d0:	82 85       	ldd	r24, Z+10	; 0x0a
+  50e5d2:	93 85       	ldd	r25, Z+11	; 0x0b
+  50e5d4:	fc 01       	movw	r30, r24
+  50e5d6:	82 89       	ldd	r24, Z+18	; 0x12
+  50e5d8:	88 2f       	mov	r24, r24
+  50e5da:	90 e0       	ldi	r25, 0x00	; 0
+  50e5dc:	82 70       	andi	r24, 0x02	; 2
+  50e5de:	99 27       	eor	r25, r25
+  50e5e0:	21 e0       	ldi	r18, 0x01	; 1
+  50e5e2:	00 97       	sbiw	r24, 0x00	; 0
+  50e5e4:	01 f4       	brne	.+0      	; 0x50e5e6 <_ZN8Resource10isReadOnlyEv+0x2a>
+  50e5e6:	20 e0       	ldi	r18, 0x00	; 0
+  50e5e8:	82 2f       	mov	r24, r18
+  50e5ea:	0f 90       	pop	r0
+  50e5ec:	0f 90       	pop	r0
+  50e5ee:	df 91       	pop	r29
+  50e5f0:	cf 91       	pop	r28
+  50e5f2:	08 95       	ret
+
+ExternalEepromResourceSystem.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .group        00000008  00000000  00000000  00000034  2**2
+                  CONTENTS, READONLY, EXCLUDE, GROUP, LINK_ONCE_DISCARD
+  1 .text         00000000  00000000  00000000  0000003c  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         00000000  00000000  00000000  0000003c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000000  00000000  00000000  0000003c  2**0
+                  ALLOC
+  4 .stab         00000744  00000000  00000000  0000003c  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  5 .stabstr      00001a25  00000000  00000000  00000780  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .text._ZN28ExternalEepromResourceSystemC2EP14ExternalEepromP6rbfs_t 00000056  00000000  00000000  000021a5  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text._ZN28ExternalEepromResourceSystem9readBytesEjPhi 0000006e  00000000  00000000  000021fb  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  8 .text._ZN28ExternalEepromResourceSystem10writeBytesEjPhi 0000006e  00000000  00000000  00002269  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .rodata._ZTV28ExternalEepromResourceSystem 00000018  00000000  00000000  000022d7  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 10 .comment      00000012  00000000  00000000  000022ef  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text._ZN28ExternalEepromResourceSystemC2EP14ExternalEepromP6rbfs_t:
+
+00000000 <_ZN28ExternalEepromResourceSystemC1EP14ExternalEepromP6rbfs_t>:
+
+int ExternalEepromResourceSystem::readBytes(unsigned int address, unsigned char* buf, int len) {
+    return eeprom->readBytes(address, buf, len);
+}
+
+void ExternalEepromResourceSystem::writeBytes(unsigned int address, unsigned char* buf, int len) {
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	00 d0       	rcall	.+0      	; 0x6 <_ZN28ExternalEepromResourceSystemC1EP14ExternalEepromP6rbfs_t+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <_ZN28ExternalEepromResourceSystemC1EP14ExternalEepromP6rbfs_t+0x8>
+   8:	00 d0       	rcall	.+0      	; 0xa <_ZN28ExternalEepromResourceSystemC1EP14ExternalEepromP6rbfs_t+0xa>
+   a:	cd b7       	in	r28, 0x3d	; 61
+   c:	de b7       	in	r29, 0x3e	; 62
+   e:	9a 83       	std	Y+2, r25	; 0x02
+  10:	89 83       	std	Y+1, r24	; 0x01
+  12:	7c 83       	std	Y+4, r23	; 0x04
+  14:	6b 83       	std	Y+3, r22	; 0x03
+  16:	5e 83       	std	Y+6, r21	; 0x06
+  18:	4d 83       	std	Y+5, r20	; 0x05
+  1a:	89 81       	ldd	r24, Y+1	; 0x01
+  1c:	9a 81       	ldd	r25, Y+2	; 0x02
+  1e:	2d 81       	ldd	r18, Y+5	; 0x05
+  20:	3e 81       	ldd	r19, Y+6	; 0x06
+  22:	b9 01       	movw	r22, r18
+    eeprom->writeBytes(address, buf, len);
+  24:	0e 94 00 00 	call	0	; 0x0 <_ZN28ExternalEepromResourceSystemC1EP14ExternalEepromP6rbfs_t>
+  28:	89 81       	ldd	r24, Y+1	; 0x01
+  2a:	9a 81       	ldd	r25, Y+2	; 0x02
+  2c:	20 e0       	ldi	r18, 0x00	; 0
+  2e:	30 e0       	ldi	r19, 0x00	; 0
+  30:	fc 01       	movw	r30, r24
+  32:	31 83       	std	Z+1, r19	; 0x01
+  34:	20 83       	st	Z, r18
+  36:	89 81       	ldd	r24, Y+1	; 0x01
+  38:	9a 81       	ldd	r25, Y+2	; 0x02
+  3a:	2b 81       	ldd	r18, Y+3	; 0x03
+  3c:	3c 81       	ldd	r19, Y+4	; 0x04
+  3e:	fc 01       	movw	r30, r24
+  40:	30 ab       	std	Z+48, r19	; 0x30
+  42:	27 a7       	std	Z+47, r18	; 0x2f
+  44:	26 96       	adiw	r28, 0x06	; 6
+  46:	0f b6       	in	r0, 0x3f	; 63
+  48:	f8 94       	cli
+  4a:	de bf       	out	0x3e, r29	; 62
+  4c:	0f be       	out	0x3f, r0	; 63
+  4e:	cd bf       	out	0x3d, r28	; 61
+  50:	df 91       	pop	r29
+  52:	cf 91       	pop	r28
+  54:	08 95       	ret
+
+Disassembly of section .text._ZN28ExternalEepromResourceSystem9readBytesEjPhi:
+
+00000056 <_ZN28ExternalEepromResourceSystem9readBytesEjPhi>:
+  56:	cf 93       	push	r28
+  58:	df 93       	push	r29
+  5a:	cd b7       	in	r28, 0x3d	; 61
+}
+  5c:	de b7       	in	r29, 0x3e	; 62
+  5e:	28 97       	sbiw	r28, 0x08	; 8
+  60:	0f b6       	in	r0, 0x3f	; 63
+  62:	f8 94       	cli
+  64:	de bf       	out	0x3e, r29	; 62
+  66:	0f be       	out	0x3f, r0	; 63
+  68:	cd bf       	out	0x3d, r28	; 61
+  6a:	9a 83       	std	Y+2, r25	; 0x02
+  6c:	89 83       	std	Y+1, r24	; 0x01
+  6e:	7c 83       	std	Y+4, r23	; 0x04
+  70:	6b 83       	std	Y+3, r22	; 0x03
+  72:	5e 83       	std	Y+6, r21	; 0x06
+  74:	4d 83       	std	Y+5, r20	; 0x05
+  76:	38 87       	std	Y+8, r19	; 0x08
+  78:	2f 83       	std	Y+7, r18	; 0x07
+  7a:	89 81       	ldd	r24, Y+1	; 0x01
+  7c:	9a 81       	ldd	r25, Y+2	; 0x02
+  7e:	dc 01       	movw	r26, r24
+  80:	9f 96       	adiw	r26, 0x2f	; 47
+  82:	8d 91       	ld	r24, X+
+  84:	9c 91       	ld	r25, X
+  86:	d0 97       	sbiw	r26, 0x30	; 48
+  88:	fc 01       	movw	r30, r24
+  8a:	80 81       	ld	r24, Z
+  8c:	91 81       	ldd	r25, Z+1	; 0x01
+  8e:	06 96       	adiw	r24, 0x06	; 6
+  90:	dc 01       	movw	r26, r24
+  92:	ed 91       	ld	r30, X+
+  94:	fc 91       	ld	r31, X
+  96:	89 81       	ldd	r24, Y+1	; 0x01
+  98:	9a 81       	ldd	r25, Y+2	; 0x02
+  9a:	dc 01       	movw	r26, r24
+  9c:	9f 96       	adiw	r26, 0x2f	; 47
+  9e:	8d 91       	ld	r24, X+
+  a0:	9c 91       	ld	r25, X
+  a2:	d0 97       	sbiw	r26, 0x30	; 48
+  a4:	2f 81       	ldd	r18, Y+7	; 0x07
+  a6:	38 85       	ldd	r19, Y+8	; 0x08
+  a8:	4d 81       	ldd	r20, Y+5	; 0x05
+  aa:	5e 81       	ldd	r21, Y+6	; 0x06
+  ac:	6b 81       	ldd	r22, Y+3	; 0x03
+  ae:	7c 81       	ldd	r23, Y+4	; 0x04
+  b0:	09 95       	icall
+  b2:	28 96       	adiw	r28, 0x08	; 8
+  b4:	0f b6       	in	r0, 0x3f	; 63
+  b6:	f8 94       	cli
+  b8:	de bf       	out	0x3e, r29	; 62
+  ba:	0f be       	out	0x3f, r0	; 63
+  bc:	cd bf       	out	0x3d, r28	; 61
+  be:	df 91       	pop	r29
+  c0:	cf 91       	pop	r28
+  c2:	08 95       	ret
+
+Disassembly of section .text._ZN28ExternalEepromResourceSystem10writeBytesEjPhi:
+
+0000011a <_ZN28ExternalEepromResourceSystem10writeBytesEjPhi>:
+ 11a:	cf 93       	push	r28
+ 11c:	df 93       	push	r29
+ 11e:	cd b7       	in	r28, 0x3d	; 61
+ 120:	de b7       	in	r29, 0x3e	; 62
+ 122:	28 97       	sbiw	r28, 0x08	; 8
+ 124:	0f b6       	in	r0, 0x3f	; 63
+ 126:	f8 94       	cli
+ 128:	de bf       	out	0x3e, r29	; 62
+ 12a:	0f be       	out	0x3f, r0	; 63
+ 12c:	cd bf       	out	0x3d, r28	; 61
+ 12e:	9a 83       	std	Y+2, r25	; 0x02
+ 130:	89 83       	std	Y+1, r24	; 0x01
+ 132:	7c 83       	std	Y+4, r23	; 0x04
+ 134:	6b 83       	std	Y+3, r22	; 0x03
+ 136:	5e 83       	std	Y+6, r21	; 0x06
+ 138:	4d 83       	std	Y+5, r20	; 0x05
+ 13a:	38 87       	std	Y+8, r19	; 0x08
+ 13c:	2f 83       	std	Y+7, r18	; 0x07
+ 13e:	89 81       	ldd	r24, Y+1	; 0x01
+ 140:	9a 81       	ldd	r25, Y+2	; 0x02
+ 142:	dc 01       	movw	r26, r24
+ 144:	9f 96       	adiw	r26, 0x2f	; 47
+ 146:	8d 91       	ld	r24, X+
+ 148:	9c 91       	ld	r25, X
+ 14a:	d0 97       	sbiw	r26, 0x30	; 48
+ 14c:	fc 01       	movw	r30, r24
+ 14e:	80 81       	ld	r24, Z
+ 150:	91 81       	ldd	r25, Z+1	; 0x01
+ 152:	02 96       	adiw	r24, 0x02	; 2
+ 154:	dc 01       	movw	r26, r24
+ 156:	ed 91       	ld	r30, X+
+ 158:	fc 91       	ld	r31, X
+ 15a:	89 81       	ldd	r24, Y+1	; 0x01
+ 15c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 15e:	dc 01       	movw	r26, r24
+ 160:	9f 96       	adiw	r26, 0x2f	; 47
+ 162:	8d 91       	ld	r24, X+
+ 164:	9c 91       	ld	r25, X
+ 166:	d0 97       	sbiw	r26, 0x30	; 48
+ 168:	2f 81       	ldd	r18, Y+7	; 0x07
+ 16a:	38 85       	ldd	r19, Y+8	; 0x08
+ 16c:	4d 81       	ldd	r20, Y+5	; 0x05
+ 16e:	5e 81       	ldd	r21, Y+6	; 0x06
+ 170:	6b 81       	ldd	r22, Y+3	; 0x03
+ 172:	7c 81       	ldd	r23, Y+4	; 0x04
+ 174:	09 95       	icall
+ 176:	28 96       	adiw	r28, 0x08	; 8
+ 178:	0f b6       	in	r0, 0x3f	; 63
+ 17a:	f8 94       	cli
+ 17c:	de bf       	out	0x3e, r29	; 62
+ 17e:	0f be       	out	0x3f, r0	; 63
+ 180:	cd bf       	out	0x3d, r28	; 61
+ 182:	df 91       	pop	r29
+ 184:	cf 91       	pop	r28
+ 186:	08 95       	ret
+
+ArrayResourceSystem.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .group        00000008  00000000  00000000  00000034  2**2
+                  CONTENTS, READONLY, EXCLUDE, GROUP, LINK_ONCE_DISCARD
+  1 .text         00000000  00000000  00000000  0000003c  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         00000000  00000000  00000000  0000003c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000000  00000000  00000000  0000003c  2**0
+                  ALLOC
+  4 .stab         00000864  00000000  00000000  0000003c  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  5 .stabstr      000019f7  00000000  00000000  000008a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .text._ZN19ArrayResourceSystemC2EPhjP6rbfs_t 0000006e  00000000  00000000  00002297  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text._ZN19ArrayResourceSystem9readBytesEjPhj 000000ca  00000000  00000000  00002305  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .text._ZN19ArrayResourceSystem10writeBytesEjPhj 0000009e  00000000  00000000  000023cf  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .rodata._ZTV19ArrayResourceSystem 0000001c  00000000  00000000  0000246d  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 10 .comment      00000012  00000000  00000000  00002489  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text._ZN19ArrayResourceSystemC2EPhjP6rbfs_t:
+
+00000000 <_ZN19ArrayResourceSystemC1EPhjP6rbfs_t>:
+        buf[i] = array[address + i];
+    }
+    return len;
+}
+
+void ArrayResourceSystem::writeBytes(unsigned int address, unsigned char* buf, unsigned int len) {
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+   8:	28 97       	sbiw	r28, 0x08	; 8
+   a:	0f b6       	in	r0, 0x3f	; 63
+   c:	f8 94       	cli
+   e:	de bf       	out	0x3e, r29	; 62
+  10:	0f be       	out	0x3f, r0	; 63
+  12:	cd bf       	out	0x3d, r28	; 61
+  14:	9a 83       	std	Y+2, r25	; 0x02
+  16:	89 83       	std	Y+1, r24	; 0x01
+  18:	7c 83       	std	Y+4, r23	; 0x04
+  1a:	6b 83       	std	Y+3, r22	; 0x03
+  1c:	5e 83       	std	Y+6, r21	; 0x06
+  1e:	4d 83       	std	Y+5, r20	; 0x05
+  20:	38 87       	std	Y+8, r19	; 0x08
+  22:	2f 83       	std	Y+7, r18	; 0x07
+    for (unsigned int i = 0; i < len && (address + i) < size; i++) {
+  24:	89 81       	ldd	r24, Y+1	; 0x01
+  26:	9a 81       	ldd	r25, Y+2	; 0x02
+  28:	2f 81       	ldd	r18, Y+7	; 0x07
+        array[address + i] = buf[i];
+  2a:	38 85       	ldd	r19, Y+8	; 0x08
+  2c:	b9 01       	movw	r22, r18
+  2e:	0e 94 00 00 	call	0	; 0x0 <_ZN19ArrayResourceSystemC1EPhjP6rbfs_t>
+  32:	89 81       	ldd	r24, Y+1	; 0x01
+  34:	9a 81       	ldd	r25, Y+2	; 0x02
+  36:	20 e0       	ldi	r18, 0x00	; 0
+  38:	30 e0       	ldi	r19, 0x00	; 0
+  3a:	fc 01       	movw	r30, r24
+  3c:	31 83       	std	Z+1, r19	; 0x01
+  3e:	20 83       	st	Z, r18
+  40:	89 81       	ldd	r24, Y+1	; 0x01
+  42:	9a 81       	ldd	r25, Y+2	; 0x02
+  44:	2b 81       	ldd	r18, Y+3	; 0x03
+  46:	3c 81       	ldd	r19, Y+4	; 0x04
+  48:	fc 01       	movw	r30, r24
+  4a:	30 ab       	std	Z+48, r19	; 0x30
+  4c:	27 a7       	std	Z+47, r18	; 0x2f
+  4e:	89 81       	ldd	r24, Y+1	; 0x01
+  50:	9a 81       	ldd	r25, Y+2	; 0x02
+  52:	2d 81       	ldd	r18, Y+5	; 0x05
+  54:	3e 81       	ldd	r19, Y+6	; 0x06
+  56:	fc 01       	movw	r30, r24
+    }
+    return len;
+}
+
+void ArrayResourceSystem::writeBytes(unsigned int address, unsigned char* buf, unsigned int len) {
+    for (unsigned int i = 0; i < len && (address + i) < size; i++) {
+  58:	32 ab       	std	Z+50, r19	; 0x32
+  5a:	21 ab       	std	Z+49, r18	; 0x31
+  5c:	28 96       	adiw	r28, 0x08	; 8
+  5e:	0f b6       	in	r0, 0x3f	; 63
+  60:	f8 94       	cli
+  62:	de bf       	out	0x3e, r29	; 62
+  64:	0f be       	out	0x3f, r0	; 63
+  66:	cd bf       	out	0x3d, r28	; 61
+  68:	df 91       	pop	r29
+  6a:	cf 91       	pop	r28
+  6c:	08 95       	ret
+
+Disassembly of section .text._ZN19ArrayResourceSystem9readBytesEjPhj:
+
+0000006e <_ZN19ArrayResourceSystem9readBytesEjPhj>:
+  6e:	cf 93       	push	r28
+  70:	df 93       	push	r29
+  72:	cd b7       	in	r28, 0x3d	; 61
+  74:	de b7       	in	r29, 0x3e	; 62
+  76:	2c 97       	sbiw	r28, 0x0c	; 12
+  78:	0f b6       	in	r0, 0x3f	; 63
+  7a:	f8 94       	cli
+  7c:	de bf       	out	0x3e, r29	; 62
+  7e:	0f be       	out	0x3f, r0	; 63
+  80:	cd bf       	out	0x3d, r28	; 61
+  82:	9e 83       	std	Y+6, r25	; 0x06
+  84:	8d 83       	std	Y+5, r24	; 0x05
+  86:	78 87       	std	Y+8, r23	; 0x08
+  88:	6f 83       	std	Y+7, r22	; 0x07
+  8a:	5a 87       	std	Y+10, r21	; 0x0a
+        array[address + i] = buf[i];
+    }
+}
+  8c:	49 87       	std	Y+9, r20	; 0x09
+  8e:	3c 87       	std	Y+12, r19	; 0x0c
+  90:	2b 87       	std	Y+11, r18	; 0x0b
+  92:	8d 81       	ldd	r24, Y+5	; 0x05
+  94:	9e 81       	ldd	r25, Y+6	; 0x06
+  96:	fc 01       	movw	r30, r24
+  98:	21 a9       	ldd	r18, Z+49	; 0x31
+  9a:	32 a9       	ldd	r19, Z+50	; 0x32
+  9c:	8f 81       	ldd	r24, Y+7	; 0x07
+  9e:	98 85       	ldd	r25, Y+8	; 0x08
+  a0:	a9 01       	movw	r20, r18
+  a2:	48 1b       	sub	r20, r24
+  a4:	59 0b       	sbc	r21, r25
+  a6:	ca 01       	movw	r24, r20
+  a8:	9c 83       	std	Y+4, r25	; 0x04
+  aa:	8b 83       	std	Y+3, r24	; 0x03
+  ac:	8b 81       	ldd	r24, Y+3	; 0x03
+  ae:	9c 81       	ldd	r25, Y+4	; 0x04
+  b0:	00 97       	sbiw	r24, 0x00	; 0
+  b2:	01 f4       	brne	.+0      	; 0xb4 <_ZN19ArrayResourceSystem9readBytesEjPhj+0x46>
+  b4:	8f ef       	ldi	r24, 0xFF	; 255
+  b6:	9f ef       	ldi	r25, 0xFF	; 255
+  b8:	00 c0       	rjmp	.+0      	; 0xba <_ZN19ArrayResourceSystem9readBytesEjPhj+0x4c>
+  ba:	2b 85       	ldd	r18, Y+11	; 0x0b
+  bc:	3c 85       	ldd	r19, Y+12	; 0x0c
+  be:	8b 81       	ldd	r24, Y+3	; 0x03
+  c0:	9c 81       	ldd	r25, Y+4	; 0x04
+  c2:	82 17       	cp	r24, r18
+  c4:	93 07       	cpc	r25, r19
+  c6:	00 f4       	brcc	.+0      	; 0xc8 <_ZN19ArrayResourceSystem9readBytesEjPhj+0x5a>
+  c8:	8b 81       	ldd	r24, Y+3	; 0x03
+  ca:	9c 81       	ldd	r25, Y+4	; 0x04
+  cc:	00 c0       	rjmp	.+0      	; 0xce <_ZN19ArrayResourceSystem9readBytesEjPhj+0x60>
+  ce:	8b 85       	ldd	r24, Y+11	; 0x0b
+  d0:	9c 85       	ldd	r25, Y+12	; 0x0c
+  d2:	9c 87       	std	Y+12, r25	; 0x0c
+  d4:	8b 87       	std	Y+11, r24	; 0x0b
+  d6:	1a 82       	std	Y+2, r1	; 0x02
+  d8:	19 82       	std	Y+1, r1	; 0x01
+  da:	00 c0       	rjmp	.+0      	; 0xdc <_ZN19ArrayResourceSystem9readBytesEjPhj+0x6e>
+  dc:	29 85       	ldd	r18, Y+9	; 0x09
+  de:	3a 85       	ldd	r19, Y+10	; 0x0a
+  e0:	89 81       	ldd	r24, Y+1	; 0x01
+  e2:	9a 81       	ldd	r25, Y+2	; 0x02
+  e4:	82 0f       	add	r24, r18
+  e6:	93 1f       	adc	r25, r19
+  e8:	2d 81       	ldd	r18, Y+5	; 0x05
+  ea:	3e 81       	ldd	r19, Y+6	; 0x06
+  ec:	f9 01       	movw	r30, r18
+  ee:	47 a5       	ldd	r20, Z+47	; 0x2f
+  f0:	50 a9       	ldd	r21, Z+48	; 0x30
+  f2:	6f 81       	ldd	r22, Y+7	; 0x07
+  f4:	78 85       	ldd	r23, Y+8	; 0x08
+  f6:	29 81       	ldd	r18, Y+1	; 0x01
+  f8:	3a 81       	ldd	r19, Y+2	; 0x02
+  fa:	26 0f       	add	r18, r22
+  fc:	37 1f       	adc	r19, r23
+  fe:	24 0f       	add	r18, r20
+ 100:	35 1f       	adc	r19, r21
+ 102:	f9 01       	movw	r30, r18
+ 104:	20 81       	ld	r18, Z
+ 106:	fc 01       	movw	r30, r24
+ 108:	20 83       	st	Z, r18
+ 10a:	89 81       	ldd	r24, Y+1	; 0x01
+ 10c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 10e:	01 96       	adiw	r24, 0x01	; 1
+ 110:	9a 83       	std	Y+2, r25	; 0x02
+ 112:	89 83       	std	Y+1, r24	; 0x01
+ 114:	29 81       	ldd	r18, Y+1	; 0x01
+ 116:	3a 81       	ldd	r19, Y+2	; 0x02
+ 118:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 11a:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 11c:	28 17       	cp	r18, r24
+ 11e:	39 07       	cpc	r19, r25
+ 120:	00 f0       	brcs	.+0      	; 0x122 <_ZN19ArrayResourceSystem9readBytesEjPhj+0xb4>
+ 122:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 124:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 126:	2c 96       	adiw	r28, 0x0c	; 12
+ 128:	0f b6       	in	r0, 0x3f	; 63
+ 12a:	f8 94       	cli
+ 12c:	de bf       	out	0x3e, r29	; 62
+ 12e:	0f be       	out	0x3f, r0	; 63
+ 130:	cd bf       	out	0x3d, r28	; 61
+ 132:	df 91       	pop	r29
+ 134:	cf 91       	pop	r28
+ 136:	08 95       	ret
+
+Disassembly of section .text._ZN19ArrayResourceSystem10writeBytesEjPhj:
+
+000001a6 <_ZN19ArrayResourceSystem10writeBytesEjPhj>:
+ 1a6:	cf 93       	push	r28
+ 1a8:	df 93       	push	r29
+ 1aa:	cd b7       	in	r28, 0x3d	; 61
+ 1ac:	de b7       	in	r29, 0x3e	; 62
+ 1ae:	2a 97       	sbiw	r28, 0x0a	; 10
+ 1b0:	0f b6       	in	r0, 0x3f	; 63
+ 1b2:	f8 94       	cli
+ 1b4:	de bf       	out	0x3e, r29	; 62
+ 1b6:	0f be       	out	0x3f, r0	; 63
+ 1b8:	cd bf       	out	0x3d, r28	; 61
+ 1ba:	9c 83       	std	Y+4, r25	; 0x04
+ 1bc:	8b 83       	std	Y+3, r24	; 0x03
+ 1be:	7e 83       	std	Y+6, r23	; 0x06
+ 1c0:	6d 83       	std	Y+5, r22	; 0x05
+ 1c2:	58 87       	std	Y+8, r21	; 0x08
+ 1c4:	4f 83       	std	Y+7, r20	; 0x07
+ 1c6:	3a 87       	std	Y+10, r19	; 0x0a
+ 1c8:	29 87       	std	Y+9, r18	; 0x09
+ 1ca:	1a 82       	std	Y+2, r1	; 0x02
+ 1cc:	19 82       	std	Y+1, r1	; 0x01
+ 1ce:	00 c0       	rjmp	.+0      	; 0x1d0 <_ZN19ArrayResourceSystem10writeBytesEjPhj+0x2a>
+ 1d0:	8b 81       	ldd	r24, Y+3	; 0x03
+ 1d2:	9c 81       	ldd	r25, Y+4	; 0x04
+ 1d4:	fc 01       	movw	r30, r24
+ 1d6:	27 a5       	ldd	r18, Z+47	; 0x2f
+ 1d8:	30 a9       	ldd	r19, Z+48	; 0x30
+ 1da:	4d 81       	ldd	r20, Y+5	; 0x05
+ 1dc:	5e 81       	ldd	r21, Y+6	; 0x06
+ 1de:	89 81       	ldd	r24, Y+1	; 0x01
+ 1e0:	9a 81       	ldd	r25, Y+2	; 0x02
+ 1e2:	84 0f       	add	r24, r20
+ 1e4:	95 1f       	adc	r25, r21
+ 1e6:	82 0f       	add	r24, r18
+ 1e8:	93 1f       	adc	r25, r19
+ 1ea:	4f 81       	ldd	r20, Y+7	; 0x07
+ 1ec:	58 85       	ldd	r21, Y+8	; 0x08
+ 1ee:	29 81       	ldd	r18, Y+1	; 0x01
+ 1f0:	3a 81       	ldd	r19, Y+2	; 0x02
+ 1f2:	24 0f       	add	r18, r20
+ 1f4:	35 1f       	adc	r19, r21
+ 1f6:	f9 01       	movw	r30, r18
+ 1f8:	20 81       	ld	r18, Z
+ 1fa:	fc 01       	movw	r30, r24
+ 1fc:	20 83       	st	Z, r18
+ 1fe:	89 81       	ldd	r24, Y+1	; 0x01
+ 200:	9a 81       	ldd	r25, Y+2	; 0x02
+ 202:	01 96       	adiw	r24, 0x01	; 1
+ 204:	9a 83       	std	Y+2, r25	; 0x02
+ 206:	89 83       	std	Y+1, r24	; 0x01
+ 208:	29 81       	ldd	r18, Y+1	; 0x01
+ 20a:	3a 81       	ldd	r19, Y+2	; 0x02
+ 20c:	89 85       	ldd	r24, Y+9	; 0x09
+ 20e:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 210:	28 17       	cp	r18, r24
+ 212:	39 07       	cpc	r19, r25
+ 214:	00 f4       	brcc	.+0      	; 0x216 <_ZN19ArrayResourceSystem10writeBytesEjPhj+0x70>
+ 216:	2d 81       	ldd	r18, Y+5	; 0x05
+ 218:	3e 81       	ldd	r19, Y+6	; 0x06
+ 21a:	89 81       	ldd	r24, Y+1	; 0x01
+ 21c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 21e:	28 0f       	add	r18, r24
+ 220:	39 1f       	adc	r19, r25
+ 222:	8b 81       	ldd	r24, Y+3	; 0x03
+ 224:	9c 81       	ldd	r25, Y+4	; 0x04
+ 226:	fc 01       	movw	r30, r24
+ 228:	81 a9       	ldd	r24, Z+49	; 0x31
+ 22a:	92 a9       	ldd	r25, Z+50	; 0x32
+ 22c:	28 17       	cp	r18, r24
+ 22e:	39 07       	cpc	r19, r25
+ 230:	00 f0       	brcs	.+0      	; 0x232 <_ZN19ArrayResourceSystem10writeBytesEjPhj+0x8c>
+ 232:	2a 96       	adiw	r28, 0x0a	; 10
+ 234:	0f b6       	in	r0, 0x3f	; 63
+ 236:	f8 94       	cli
+ 238:	de bf       	out	0x3e, r29	; 62
+ 23a:	0f be       	out	0x3f, r0	; 63
+ 23c:	cd bf       	out	0x3d, r28	; 61
+ 23e:	df 91       	pop	r29
+ 240:	cf 91       	pop	r28
+ 242:	08 95       	ret

@@ -13,20 +13,18 @@
 
 #include "ResourceSystem.h"
 
-ResourceSystem::ResourceSystem(srbfs_t *srbfs)
-        : srbfs(srbfs) {
+ResourceSystem::ResourceSystem(rbfs_t *rbfs)
+        : rbfs(rbfs) {
     lastOperationResult = Resource::OPERATION_SUCCESS;
-    srbfs->io->read = &read;
-    srbfs->io->write = &write;
 }
 
 bool ResourceSystem::format() {
-    Resource::ResourceOperationResult o = (Resource::ResourceOperationResult) srbfs_format(srbfs);
+    Resource::ResourceOperationResult o = (Resource::ResourceOperationResult) rbfs_format(rbfs);
     return (o == Resource::OPERATION_SUCCESS);
 }
 
 bool ResourceSystem::mount(MountOptions options) {
-    lastOperationResult = (Resource::ResourceOperationResult) srbfs_mount(srbfs, (srbfs_mount_options_t) options);
+    lastOperationResult = (Resource::ResourceOperationResult) rbfs_mount(rbfs->driver, rbfs, (rbfs_mount_options_t) options);
     return (lastOperationResult == Resource::OPERATION_SUCCESS);
 }
 
@@ -38,35 +36,35 @@ void ResourceSystem::flush() {
 
 bool ResourceSystem::umount() {
     flush();
-    lastOperationResult = (Resource::ResourceOperationResult) srbfs_umount(srbfs);
+    lastOperationResult = (Resource::ResourceOperationResult) rbfs_umount(rbfs);
     return (lastOperationResult == Resource::OPERATION_SUCCESS);
 }
 
 Resource ResourceSystem::allocResource() {
     flush();
-    Resource rw(RS_NULL_RESOURCE_CODE, srbfs);
-    srbfs_resource_code_t code;
-    code = srbfs_alloc(srbfs);
-    if (code != RS_NULL_RESOURCE_CODE) {
-        rw.setCode(code);
+    Resource resource(RBFS_NULL_RESOURCE_CODE, rbfs);
+    rbfs_resource_code_t code;
+    code = rbfs_alloc(rbfs);
+    if (code != RBFS_NULL_RESOURCE_CODE) {
+        resource.setCode(code);
     }
-    return rw;
+    return resource;
 }
 
 Resource ResourceSystem::loadResource(int code) {
     flush();
-    Resource resource((srbfs_resource_code_t) code, srbfs);
-    resource.srbfs = srbfs;
-    resource.code = code;
+    Resource resource((rbfs_resource_code_t) code, rbfs);
+    resource.setRbfs(rbfs);
+    resource.setCode(code);
     return resource;
 }
 
 unsigned int ResourceSystem::totalSpace() {
-    return (unsigned int) srbfs_total_space(srbfs);
+    return (unsigned int) rbfs_total_space(rbfs);
 }
 
 unsigned int ResourceSystem::availableSpace() {
-    return (unsigned int) srbfs_available_space(srbfs);
+    return (unsigned int) rbfs_available_space(rbfs);
 }
 
 
