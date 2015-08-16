@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <ResourceSystem.h>
+#include <rbfs.h>
 
 class VirtualResourceSystem : public ResourceSystem {
 private:
@@ -20,7 +21,7 @@ private:
     FILE *fp;
 public:
 
-    VirtualResourceSystem(srbfs_t* srbfs, char *fileName);
+    VirtualResourceSystem(rbfs_t* rbfs, char *fileName);
 
     virtual bool open();
 

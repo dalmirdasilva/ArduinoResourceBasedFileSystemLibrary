@@ -12,6 +12,7 @@
 #define __ARDUINO_SIMPLE_VIRTUAL_RESOURCE_IO_CPP__ 1
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stddef.h>
 #include "VirtualResourceSystem.h"
 
